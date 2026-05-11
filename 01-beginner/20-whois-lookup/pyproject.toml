@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_20"
+version = "0.1.0"
+description = "WHOIS Lookup Wrapper — query domain and IP registration metadata"
+requires-python = ">=3.11"
+dependencies = ["python-whois>=0.9"]
+
+[project.scripts]
+whois-lookup = "project_20.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
