@@ -12,7 +12,7 @@ pytest-mock>=3.14.0
 pytest-asyncio>=0.23.0
 
 # Type stubs
-types-requests>=2.31.0
+types-requests>=2.33.0.20260508
 types-PyYAML>=6.0.12
 types-toml>=0.10.8
 
