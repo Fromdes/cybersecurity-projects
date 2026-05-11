@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_12"
+version = "0.1.0"
+description = "QR Code TOTP Provisioner — render otpauth:// QR codes for authenticator apps"
+requires-python = ">=3.11"
+dependencies = ["pyotp>=2.9", "qrcode[pil]>=7.4"]
+
+[project.scripts]
+totp-qr = "project_12.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]

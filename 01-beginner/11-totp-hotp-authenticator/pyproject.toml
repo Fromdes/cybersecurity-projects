@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_11"
+version = "0.1.0"
+description = "TOTP/HOTP Authenticator — RFC 6238/4226 two-factor authentication"
+requires-python = ">=3.11"
+dependencies = ["pyotp>=2.9"]
+
+[project.scripts]
+otp = "project_11.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
