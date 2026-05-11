@@ -3,7 +3,7 @@ ruff>=0.4.0
 mypy>=1.10.0
 
 # Security scanning
-bandit[toml]>=1.7.8
+bandit[toml]>=1.9.4
 
 # Testing
 pytest>=8.2.0
