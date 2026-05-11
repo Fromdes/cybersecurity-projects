@@ -14,7 +14,7 @@ pytest-asyncio>=0.23.0
 # Type stubs
 types-requests>=2.31.0
 types-PyYAML>=6.0.12
-types-toml>=0.10.8
+types-toml>=0.10.8.20260508
 
 # Build tools
 build>=1.2.0
