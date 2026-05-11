@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-07-hibp-client"
+version = "0.1.0"
+description = "Have-I-Been-Pwned Client — k-anonymity breach check without exposing passwords"
+requires-python = ">=3.11"
+dependencies = ["requests>=2.32"]
+
+[project.scripts]
+hibp-check = "project_07.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers -v"
+markers = ["integration: marks tests as integration tests"]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

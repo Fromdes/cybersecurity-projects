@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-01-caesar-vigenere"
+version = "0.1.0"
+description = "Caesar & Vigenere Cipher Toolkit — classical cipher analysis to understand substitution weaknesses"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+cipher-toolkit = "project_01.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+extend = "../../pyproject.toml"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers -v"
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

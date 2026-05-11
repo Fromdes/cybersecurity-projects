@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-08-aes-gcm-file-encryptor"
+version = "0.1.0"
+description = "AES-256-GCM File Encryptor — authenticated encryption for files at rest"
+requires-python = ">=3.11"
+dependencies = ["cryptography>=42"]
+
+[project.scripts]
+aes-crypt = "project_08.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers -v"
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
