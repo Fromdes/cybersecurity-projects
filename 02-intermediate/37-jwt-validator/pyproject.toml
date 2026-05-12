@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_37"
+version = "0.1.0"
+description = "JWT Validator & Inspector — decode, validate, and audit JSON Web Tokens"
+requires-python = ">=3.11"
+dependencies = [
+    "PyJWT>=2.8",
+    "cryptography>=41",
+    "click>=8.1",
+]
+
+[project.scripts]
+jwt-validator = "project_37.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]

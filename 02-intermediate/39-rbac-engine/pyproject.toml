@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_39"
+version = "0.1.0"
+description = "RBAC Engine — Role-Based Access Control with role hierarchy and audit logging"
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+    "click>=8.1",
+]
+
+[project.scripts]
+rbac = "project_39.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
