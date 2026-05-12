@@ -2,8 +2,8 @@
 
 > 100 blue-team Python tools, beginner to advanced — built on Kali Linux for cybersecurity internship applications.
 
-[![CI](https://github.com/YOUR_USERNAME/cybersecurity-projects/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/cybersecurity-projects/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/YOUR_USERNAME/cybersecurity-projects/actions/workflows/codeql.yml/badge.svg)](https://github.com/YOUR_USERNAME/cybersecurity-projects/actions/workflows/codeql.yml)
+[![CI](https://github.com/Fromdes/cybersecurity-projects/actions/workflows/ci.yml/badge.svg)](https://github.com/Fromdes/cybersecurity-projects/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Fromdes/cybersecurity-projects/actions/workflows/codeql.yml/badge.svg)](https://github.com/Fromdes/cybersecurity-projects/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -164,7 +164,7 @@ cybersecurity-projects/
 sudo apt update && sudo apt install -y python3.11 python3.11-venv python3-pip git
 
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/cybersecurity-projects.git
+git clone https://github.com/Fromdes/cybersecurity-projects.git
 cd cybersecurity-projects
 
 # Install dev tools
