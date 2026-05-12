@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-82-memory-dump-ioc"
+version = "0.1.0"
+description = "Memory Dump IOC Extractor — extract IPs, domains, URLs, hashes from memory dumps"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.scripts]
+memory-ioc = "project_82.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_82"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]

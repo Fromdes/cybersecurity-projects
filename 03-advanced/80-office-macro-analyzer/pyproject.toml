@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-80-office-macro-analyzer"
+version = "0.1.0"
+description = "Office Macro Risk Analyzer — VBA static analysis via oletools"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1", "oletools>=0.60"]
+
+[project.scripts]
+office-macro-analyzer = "project_80.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_80"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104","S603"]
