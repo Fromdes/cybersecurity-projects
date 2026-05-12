@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_34"
+version = "0.1.0"
+description = "Encrypted Notes CLI — AES-256-GCM notes with Argon2id key derivation"
+requires-python = ">=3.11"
+dependencies = [
+    "cryptography>=41",
+    "argon2-cffi>=23",
+]
+
+[project.scripts]
+enc-notes = "project_34.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]

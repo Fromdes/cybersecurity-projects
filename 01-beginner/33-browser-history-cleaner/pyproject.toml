@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_33"
+version = "0.1.0"
+description = "Browser History Privacy Cleaner — scan and selectively purge browser history"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+history-cleaner = "project_33.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]

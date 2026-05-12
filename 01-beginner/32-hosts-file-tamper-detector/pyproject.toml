@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_32"
+version = "0.1.0"
+description = "Hosts File Tamper Detector — baseline and detect unauthorised changes to /etc/hosts"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+hosts-tamper-detect = "project_32.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_31"
+version = "0.1.0"
+description = "Listening Port Auditor — enumerate and risk-score all open listening ports"
+requires-python = ">=3.11"
+dependencies = ["psutil>=5.9"]
+
+[project.scripts]
+port-auditor = "project_31.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
