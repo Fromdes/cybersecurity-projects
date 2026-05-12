@@ -11,8 +11,6 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 from enum import Enum
-from pathlib import PurePosixPath
-from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -275,7 +273,7 @@ def validate_email(email: str) -> bool:
         True if the string looks like a valid email.
     """
     pattern = re.compile(r"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$")
-    return bool(pattern.match(email)) and len(email) <= 254  # noqa: PLR2004
+    return bool(pattern.match(email)) and len(email) <= 254
 
 
 def validate_integer(value: str, *, min_val: int | None = None, max_val: int | None = None) -> int:

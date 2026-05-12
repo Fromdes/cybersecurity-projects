@@ -9,8 +9,6 @@ import pytest
 from project_08.core import (
     MAGIC,
     MAGIC_LEN,
-    NONCE_LEN,
-    SALT_LEN,
     DecryptionError,
     decrypt_file,
     encrypt_file,

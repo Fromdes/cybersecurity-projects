@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-
 from project_53.core import (
     ScanDetector,
     analyse_log_file,

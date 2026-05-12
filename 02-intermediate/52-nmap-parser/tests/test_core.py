@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import pytest
-
-from project_52.core import PortInfo, diff_scans, parse_nmap_xml
+from project_52.core import diff_scans, parse_nmap_xml
 
 SIMPLE_XML = """\
 <?xml version="1.0"?>

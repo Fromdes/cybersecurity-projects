@@ -5,10 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from project_98.core import (
-    AnomalyReport,
     NetworkFlow,
     analyze_flows,
     detect_ddos,

@@ -21,7 +21,7 @@ def _make_pem(tmp_path: Path, days: int = 365) -> Path:
     subject = issuer = x509.Name([
         x509.NameAttribute(NameOID.COMMON_NAME, "cli-test.example.com"),
     ])
-    now = datetime.datetime.now(datetime.timezone.utc)
+    now = datetime.datetime.now(datetime.UTC)
     cert = (
         x509.CertificateBuilder()
         .subject_name(subject)

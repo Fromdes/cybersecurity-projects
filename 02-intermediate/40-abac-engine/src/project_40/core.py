@@ -71,7 +71,7 @@ class AttributeSet:
         return self.attrs.get(key, default)
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "AttributeSet":
+    def from_dict(cls, data: dict[str, Any]) -> AttributeSet:
         """Create from a plain dict."""
         return cls(attrs=dict(data))
 
@@ -292,7 +292,7 @@ class ABACEngine:
         )
 
     @classmethod
-    def from_yaml(cls, yaml_text: str) -> "ABACEngine":
+    def from_yaml(cls, yaml_text: str) -> ABACEngine:
         """Load engine from a YAML policy string.
 
         Args:
@@ -309,7 +309,7 @@ class ABACEngine:
             conditions: list[Condition] = []
             for cdata in rdata.get("conditions", []):
                 parts = cdata["attribute"].split(".", 1)
-                if len(parts) != 2:  # noqa: PLR2004
+                if len(parts) != 2:
                     raise ValueError(f"Condition attribute must be 'namespace.attr', got: {cdata['attribute']}")
                 conditions.append(Condition(
                     namespace=parts[0],

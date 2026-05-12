@@ -5,7 +5,6 @@ from __future__ import annotations
 import pytest
 
 from project_40.core import (
-    ABACDecision,
     ABACEngine,
     AttributeSet,
     CombiningAlgorithm,

@@ -6,6 +6,7 @@ import hashlib
 import json
 import logging
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -96,7 +97,7 @@ def check_integrity(
     Returns:
         :class:`IntegrityReport` describing changes found.
     """
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     current = create_baseline(directory, exclude=exclude)
     baseline_keys = set(baseline.keys())
@@ -110,7 +111,7 @@ def check_integrity(
 
     return IntegrityReport(
         baseline_path=directory,
-        checked_at=datetime.now(timezone.utc).isoformat(),
+        checked_at=datetime.now(UTC).isoformat(),
         new_files=new_files,
         deleted_files=deleted_files,
         modified_files=modified_files,

@@ -3,14 +3,10 @@
 from __future__ import annotations
 
 import io
-import json
 import tarfile
 from pathlib import Path
 
-import pytest
-
 from project_88.core import (
-    ImageFinding,
     ScanResult,
     _check_image_config,
     _scan_tar_for_sensitive_files,

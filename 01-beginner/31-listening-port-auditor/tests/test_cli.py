@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from project_31.cli import main, _entry_to_dict
+from project_31.cli import _entry_to_dict, main
 from project_31.core import PortEntry
 
 
@@ -47,7 +47,6 @@ class TestMain:
     def test_json_output(
         self, mock_filter: MagicMock, mock_list: MagicMock, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        import sys
         mock_list.return_value = [_make_entry()]
         mock_filter.return_value = [_make_entry()]
         with patch("sys.argv", ["port-auditor", "--json"]):

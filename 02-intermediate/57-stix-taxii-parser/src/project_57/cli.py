@@ -50,6 +50,6 @@ def discover_cmd(server_url: str, user: str, password: str, no_verify_ssl: bool)
     try:
         info = client.discover()
         click.echo(json.dumps(info, indent=2))
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         click.echo(f"[error] {exc}", err=True)
         sys.exit(1)

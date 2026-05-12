@@ -49,7 +49,7 @@ class STIXObject:
     raw: dict[str, Any]
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "STIXObject":
+    def from_dict(cls, data: dict[str, Any]) -> STIXObject:
         return cls(
             stix_id=data.get("id", ""),
             stix_type=data.get("type", ""),
@@ -73,7 +73,7 @@ class STIXIndicator(STIXObject):
     labels: list[str] = field(default_factory=list)
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "STIXIndicator":  # type: ignore[override]
+    def from_dict(cls, data: dict[str, Any]) -> STIXIndicator:  # type: ignore[override]
         base = STIXObject.from_dict(data)
         return cls(
             **base.__dict__,
@@ -107,7 +107,7 @@ class STIXBundle:
     objects: list[STIXObject] = field(default_factory=list)
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "STIXBundle":
+    def from_dict(cls, data: dict[str, Any]) -> STIXBundle:
         bundle = cls(
             bundle_id=data.get("id", ""),
             spec_version=data.get("spec_version", "2.1"),
@@ -121,12 +121,12 @@ class STIXBundle:
         return bundle
 
     @classmethod
-    def from_file(cls, path: Path) -> "STIXBundle":
+    def from_file(cls, path: Path) -> STIXBundle:
         data = json.loads(path.read_text(encoding="utf-8"))
         return cls.from_dict(data)
 
     @classmethod
-    def from_string(cls, content: str) -> "STIXBundle":
+    def from_string(cls, content: str) -> STIXBundle:
         return cls.from_dict(json.loads(content))
 
     def indicators(self) -> list[STIXIndicator]:

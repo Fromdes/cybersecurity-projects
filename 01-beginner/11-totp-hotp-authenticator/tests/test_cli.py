@@ -7,7 +7,7 @@ import sys
 import pytest
 
 from project_11.cli import main
-from project_11.core import generate_secret, generate_totp, generate_hotp, TOTPConfig
+from project_11.core import TOTPConfig, generate_hotp, generate_totp
 
 _SECRET = "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ"
 

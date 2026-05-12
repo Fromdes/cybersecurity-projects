@@ -10,10 +10,10 @@ from project_31.core import (
     RISK_HIGH,
     RISK_MEDIUM,
     PortEntry,
-    filter_by_risk,
-    list_listening_ports,
     _compute_risk,
     _score_to_level,
+    filter_by_risk,
+    list_listening_ports,
 )
 
 

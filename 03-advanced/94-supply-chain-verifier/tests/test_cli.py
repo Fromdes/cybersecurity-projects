@@ -105,7 +105,7 @@ class TestCheckSumsCommand:
         f1 = tmp_path / "file1.bin"
         f1.write_bytes(b"content1")
         sums = tmp_path / "sha256sums"
-        sums.write_text(f"wronghash  file1.bin\n")
+        sums.write_text("wronghash  file1.bin\n")
         result = runner.invoke(cli, ["check-sums", str(sums), "--exit-code"])
         assert result.exit_code == 1
 

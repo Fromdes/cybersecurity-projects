@@ -41,7 +41,6 @@ class TestBuildCommand:
 
 class TestSummaryCommand:
     def test_summary(self, tmp_path: Path) -> None:
-        from datetime import datetime, timezone
         timeline_file = tmp_path / "timeline.jsonl"
         events = [
             {"timestamp": "2024-05-12T10:00:00+00:00", "source": "filesystem",

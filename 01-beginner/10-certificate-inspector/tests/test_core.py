@@ -8,11 +8,10 @@ from pathlib import Path
 import pytest
 from cryptography import x509
 from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.asymmetric import rsa, ec
+from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from cryptography.x509.oid import NameOID
 
 from project_10.core import (
-    CertificateReport,
     inspect_certificate,
     load_from_file,
 )
@@ -34,7 +33,7 @@ def _make_self_signed_cert(
         x509.NameAttribute(NameOID.COMMON_NAME, "test.example.com"),
         x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Test Org"),
     ])
-    now = datetime.datetime.now(datetime.timezone.utc)
+    now = datetime.datetime.now(datetime.UTC)
     cert = (
         x509.CertificateBuilder()
         .subject_name(subject)

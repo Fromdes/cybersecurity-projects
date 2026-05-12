@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import base64
 import hashlib
 import json
 import struct
@@ -10,9 +9,9 @@ import struct
 import pytest
 
 from project_42.core import (
+    FLAG_AT,
     FLAG_UP,
     FLAG_UV,
-    FLAG_AT,
     ChallengeStore,
     CredentialStore,
     StoredCredential,

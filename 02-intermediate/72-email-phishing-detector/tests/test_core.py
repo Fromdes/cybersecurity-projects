@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-
 from project_72.core import (
     PhishingAnalysis,
     analyse_email,
@@ -14,7 +12,6 @@ from project_72.core import (
     count_urgency_words,
     extract_urls,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helper to build minimal raw emails

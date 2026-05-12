@@ -4,19 +4,12 @@ from __future__ import annotations
 
 import struct
 
-import pytest
-
 from project_65.core import (
-    NETFLOW_V5_HEADER_SIZE,
-    NETFLOW_V5_RECORD_SIZE,
     NetFlowRecord,
-    NetFlowV5Packet,
-    TrafficStats,
     _ip_from_uint32,
     analyse_records,
     parse_netflow_v5,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers to build synthetic NetFlow v5 data

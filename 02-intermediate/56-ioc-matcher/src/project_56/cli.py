@@ -8,7 +8,7 @@ from pathlib import Path
 
 import click
 
-from .core import IOC, IOCMatcher, IOCStore, IOCType, extract_iocs_from_text
+from .core import IOCMatcher, IOCStore, IOCType, extract_iocs_from_text
 
 
 @click.group()
@@ -26,7 +26,7 @@ def match_cmd(target: str, ioc_csv: str | None, ioc_json: str | None, json_outpu
     store = IOCStore()
     if ioc_csv:
         store.add_many(IOCStore.from_csv(Path(ioc_csv)).
-                       _store[IOCType.IPV4].__class__.__mro__[0].__subclasses__())  # noqa — just re-merge
+                       _store[IOCType.IPV4].__class__.__mro__[0].__subclasses__())
         store = IOCStore.from_csv(Path(ioc_csv))
     if ioc_json:
         store = IOCStore.from_json(Path(ioc_json))

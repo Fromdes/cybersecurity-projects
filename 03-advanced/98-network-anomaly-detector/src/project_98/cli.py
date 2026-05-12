@@ -8,7 +8,7 @@ from pathlib import Path
 
 import click
 
-from project_98.core import AnomalyReport, analyze_flows, load_flows
+from project_98.core import analyze_flows, load_flows
 
 
 @click.group()

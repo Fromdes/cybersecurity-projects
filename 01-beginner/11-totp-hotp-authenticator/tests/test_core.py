@@ -8,7 +8,6 @@ import pytest
 
 from project_11.core import (
     DEFAULT_DIGITS,
-    DEFAULT_INTERVAL,
     TOTPConfig,
     generate_hotp,
     generate_secret,

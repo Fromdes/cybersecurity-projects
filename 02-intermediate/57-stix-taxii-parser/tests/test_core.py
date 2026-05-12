@@ -3,12 +3,9 @@
 from __future__ import annotations
 
 import json
-import tempfile
 from pathlib import Path
 
-import pytest
-
-from project_57.core import STIXBundle, STIXIndicator, STIXObject, STIXType
+from project_57.core import STIXBundle, STIXIndicator, STIXObject
 
 SAMPLE_BUNDLE = {
     "type": "bundle",

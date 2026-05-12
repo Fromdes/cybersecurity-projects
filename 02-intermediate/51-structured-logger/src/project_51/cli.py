@@ -22,7 +22,6 @@ def cli() -> None:
 @click.argument("message")
 def emit_cmd(service: str, level: str, message: str) -> None:
     """Emit a structured log line."""
-    import logging
     log = get_structured_logger("cli", service_name=service)
     getattr(log, level.lower())(message)
 

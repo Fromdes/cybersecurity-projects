@@ -8,11 +8,12 @@ import logging
 import re
 import threading
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +56,7 @@ class Alert:
     severity: Severity
     message: str
     event: LogEvent
-    triggered_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    triggered_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize to dict for JSON output."""
@@ -160,7 +161,7 @@ class LogParser:
         line = line.strip()
         if not line:
             return None
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         event_id = LogEvent._make_id(line, ts)
         return LogEvent(
             event_id=event_id,
@@ -186,7 +187,7 @@ class SyslogParser(LogParser):
         if not line:
             return None
         m = self._PATTERN.match(line)
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         fields: dict[str, str] = {}
         message = line
         if m:
@@ -218,7 +219,7 @@ class ApacheParser(LogParser):
         if not line:
             return None
         m = self._PATTERN.match(line)
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         fields: dict[str, str] = {}
         message = line
         if m:

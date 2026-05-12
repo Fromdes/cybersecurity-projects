@@ -35,7 +35,7 @@ def upload_cmd(file_path: str, storage_dir: str | None, max_mb: int) -> None:
         click.echo(f"     Size      : {result.size_bytes} bytes")
         click.echo(f"     SHA-256   : {result.sha256}")
         click.echo(f"     Path      : {result.storage_path}")
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         click.echo(f"[error] {exc}", err=True)
         sys.exit(1)
 
@@ -50,7 +50,7 @@ def validate_cmd(file_path: str) -> None:
     try:
         mime = validator.validate(src.name, data)
         click.echo(f"[ok] Valid — MIME: {mime}, size: {len(data)} bytes")
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         click.echo(f"[fail] {exc}", err=True)
         sys.exit(1)
 

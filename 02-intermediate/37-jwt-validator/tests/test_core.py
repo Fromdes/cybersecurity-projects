@@ -97,7 +97,8 @@ class TestValidateToken:
 
     def test_none_algorithm_rejected(self) -> None:
         # Craft a token with alg=none by hand
-        import base64, json
+        import base64
+        import json
         header = base64.urlsafe_b64encode(json.dumps({"alg": "none", "typ": "JWT"}).encode()).rstrip(b"=").decode()
         payload = base64.urlsafe_b64encode(json.dumps({"sub": "evil"}).encode()).rstrip(b"=").decode()
         fake_token = f"{header}.{payload}."

@@ -10,8 +10,6 @@ import pytest
 
 from project_85.core import (
     Dependency,
-    DependencyResult,
-    Vulnerability,
     _extract_fixed_version,
     _parse_severity,
     detect_and_parse,

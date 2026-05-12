@@ -10,7 +10,6 @@ from click.testing import CliRunner
 
 from project_91.cli import cli
 
-
 ADMIN_POLICY = {
     "Version": "2012-10-17",
     "Statement": [{"Effect": "Allow", "Sid": "Admin", "Action": "*", "Resource": "*"}],

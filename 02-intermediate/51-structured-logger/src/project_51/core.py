@@ -6,7 +6,7 @@ import logging
 import re
 import time
 import traceback
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from io import StringIO
 from typing import Any, Final
 

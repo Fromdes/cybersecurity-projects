@@ -10,7 +10,6 @@ from click.testing import CliRunner
 
 from project_89.cli import cli
 
-
 DANGEROUS_YAML = """\
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

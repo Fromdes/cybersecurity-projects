@@ -8,7 +8,7 @@ import threading
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Final
+from typing import Final
 
 logger = logging.getLogger(__name__)
 
@@ -140,7 +140,7 @@ def _handle_connection(
         # Drop connection — do NOT attempt paramiko key exchange here
         # so we avoid any risk of running code on behalf of the attacker.
 
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         logger.debug("Honeypot connection error: %s", exc)
     finally:
         honeypot_logger.record(HoneypotEvent(

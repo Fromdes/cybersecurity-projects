@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import socket
-import struct
 import sys
-from pathlib import Path
 
 import click
 

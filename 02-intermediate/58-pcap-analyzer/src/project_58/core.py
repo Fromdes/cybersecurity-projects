@@ -232,8 +232,8 @@ class PCAPAnalyser:
 
     def _detect_syn_flood(self, packets: list[Packet], stats: PCAPStats) -> None:
         """Detect SYN-only flood (TCP SYN without ACK)."""
-        SYN = 0x02  # noqa: N806
-        ACK = 0x10  # noqa: N806
+        SYN = 0x02
+        ACK = 0x10
         syn_counts: dict[str, int] = defaultdict(int)
         for pkt in packets:
             if pkt.protocol == PROTOCOL_TCP:

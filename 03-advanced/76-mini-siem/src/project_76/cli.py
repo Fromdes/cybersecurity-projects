@@ -4,17 +4,16 @@ from __future__ import annotations
 
 import json
 import logging
-import sys
 import threading
 from pathlib import Path
 
 import click
 
 from project_76.core import (
-    AlertStore,
     BUILTIN_RULES,
-    SIEMEngine,
+    AlertStore,
     Severity,
+    SIEMEngine,
     get_parser,
 )
 

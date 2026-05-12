@@ -9,7 +9,7 @@ import pytest
 from click.testing import CliRunner
 
 from project_42.cli import main
-from project_42.core import build_sample_auth_data, FLAG_UP, FLAG_UV
+from project_42.core import build_sample_auth_data
 
 
 @pytest.fixture()

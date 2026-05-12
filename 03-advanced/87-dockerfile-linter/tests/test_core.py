@@ -4,13 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from project_87.core import (
-    LintFinding,
-    check_expose_privileged_port,
     check_healthcheck,
-    check_no_apt_upgrade,
     check_no_curl_pipe_sh,
     check_no_latest_tag,
     check_no_root_user,

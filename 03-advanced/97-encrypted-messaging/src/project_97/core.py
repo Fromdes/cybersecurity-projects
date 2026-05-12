@@ -4,13 +4,11 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
-from typing import Any
 
-from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey, X25519PublicKey
+from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PublicKey
 
 from project_97.crypto import (
     KeyPair,
-    decode_public_key,
     decrypt,
     dh,
     encode_public_key,
@@ -21,7 +19,6 @@ from project_97.crypto import (
     kdf_rk,
     parse_header,
 )
-
 
 # ── Message model ─────────────────────────────────────────────────────────────
 
@@ -41,7 +38,7 @@ class Message:
         return struct.pack(">I", len(self.header)) + self.header + self.ciphertext
 
     @staticmethod
-    def from_bytes(data: bytes) -> "Message":
+    def from_bytes(data: bytes) -> Message:
         """Deserialize from wire bytes."""
         import struct
         hlen = struct.unpack(">I", data[:4])[0]

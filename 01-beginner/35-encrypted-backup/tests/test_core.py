@@ -7,7 +7,6 @@ import pytest
 from cryptography.exceptions import InvalidTag
 
 from project_35.core import (
-    BackupManifest,
     MAGIC,
     create_backup,
     derive_key,

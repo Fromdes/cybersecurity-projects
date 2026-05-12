@@ -7,8 +7,6 @@ from pathlib import Path
 import pytest
 
 from project_32.core import (
-    HostsEntry,
-    TamperResult,
     _is_suspicious_redirect,
     detect_tampering,
     hash_file,

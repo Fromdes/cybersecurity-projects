@@ -4,8 +4,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from project_12.core import TOTPParams, generate_uri, render_png, render_terminal
 
 _SECRET = "JBSWY3DPEHPK3PXP"

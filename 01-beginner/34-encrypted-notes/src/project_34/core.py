@@ -3,11 +3,10 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import secrets
 import uuid
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from argon2.low_level import Type, hash_secret_raw
@@ -35,9 +34,9 @@ class Note:
     updated_at: str
 
     @staticmethod
-    def new(title: str, body: str) -> "Note":
+    def new(title: str, body: str) -> Note:
         """Create a new note with generated ID and timestamps."""
-        now = datetime.now(tz=timezone.utc).isoformat()
+        now = datetime.now(tz=UTC).isoformat()
         return Note(id=str(uuid.uuid4()), title=title, body=body,
                     created_at=now, updated_at=now)
 
@@ -185,7 +184,7 @@ class NotesStore:
             title=title if title is not None else note.title,
             body=body if body is not None else note.body,
             created_at=note.created_at,
-            updated_at=datetime.now(tz=timezone.utc).isoformat(),
+            updated_at=datetime.now(tz=UTC).isoformat(),
         )
         self._notes[idx] = updated
         self.save()

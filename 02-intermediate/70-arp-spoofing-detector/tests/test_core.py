@@ -4,13 +4,10 @@ from __future__ import annotations
 
 import struct
 
-import pytest
-
 from project_70.core import (
     ARP_REPLY,
     ARP_REQUEST,
     ETHERTYPE_ARP,
-    ARPConflict,
     ARPPacket,
     ARPTable,
     _ip_from_bytes,
@@ -20,7 +17,6 @@ from project_70.core import (
     parse_arp_packet,
     read_pcap_frames,
 )
-
 
 # ---------------------------------------------------------------------------
 # Synthetic frame builders

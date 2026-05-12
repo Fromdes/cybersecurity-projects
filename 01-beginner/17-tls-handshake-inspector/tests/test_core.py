@@ -1,14 +1,11 @@
 """Tests for project_17.core — TLS Handshake Inspector."""
 from __future__ import annotations
 
-import ssl
-from datetime import datetime, timezone
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from project_17.core import (
-    CertInfo,
     TLSResult,
     _extract_san,
     _parse_cert,

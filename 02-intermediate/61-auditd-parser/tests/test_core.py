@@ -2,15 +2,10 @@
 
 from __future__ import annotations
 
-import tempfile
 from pathlib import Path
 
-import pytest
-
 from project_61.core import (
-    AuditAlert,
     AuditEvent,
-    AuditRecord,
     correlate_records,
     detect_anomalies,
     parse_line,

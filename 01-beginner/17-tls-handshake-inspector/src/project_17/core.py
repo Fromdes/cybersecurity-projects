@@ -4,7 +4,7 @@ from __future__ import annotations
 import socket
 import ssl
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 CONNECT_TIMEOUT: float = 10.0
 DEFAULT_PORT: int = 443
@@ -82,8 +82,8 @@ def _parse_cert(raw: dict[str, object]) -> CertInfo:
     not_before = _parse_date(str(raw.get("notBefore", "")))
     not_after = _parse_date(str(raw.get("notAfter", "")))
     san = _extract_san(raw.get("subjectAltName", ()))  # type: ignore[arg-type]
-    now = datetime.now(tz=timezone.utc)
-    _epoch = datetime.min.replace(tzinfo=timezone.utc)
+    now = datetime.now(tz=UTC)
+    _epoch = datetime.min.replace(tzinfo=UTC)
     nb = not_before or _epoch
     na = not_after or _epoch
     is_expired = (na < now) if not_after else False
@@ -107,7 +107,7 @@ def _parse_date(date_str: str) -> datetime | None:
     if not date_str:
         return None
     try:
-        return datetime.strptime(date_str, CERT_DATE_FORMAT).replace(tzinfo=timezone.utc)
+        return datetime.strptime(date_str, CERT_DATE_FORMAT).replace(tzinfo=UTC)
     except ValueError:
         return None
 

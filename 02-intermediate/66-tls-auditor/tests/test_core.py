@@ -3,9 +3,6 @@
 from __future__ import annotations
 
 import datetime
-from unittest.mock import MagicMock, patch
-
-import pytest
 
 from project_66.core import (
     CERT_CRITICAL_DAYS,
@@ -19,7 +16,6 @@ from project_66.core import (
     analyse_result,
     audit_tls,
 )
-
 
 # ---------------------------------------------------------------------------
 # CipherInfo
@@ -48,7 +44,7 @@ class TestCipherInfo:
 # ---------------------------------------------------------------------------
 
 def _make_cert(days_remaining: int, sig_algo: str = "sha256WithRSAEncryption") -> CertInfo:
-    now = datetime.datetime.now(tz=datetime.timezone.utc)
+    now = datetime.datetime.now(tz=datetime.UTC)
     return CertInfo(
         subject={"commonName": "example.com"},
         issuer={"organizationName": "Test CA"},
@@ -179,7 +175,7 @@ class TestAnalyseCert:
         assert any("sha1" in f.lower() for f in r.findings)
 
     def test_no_san_warning(self) -> None:
-        now = datetime.datetime.now(tz=datetime.timezone.utc)
+        now = datetime.datetime.now(tz=datetime.UTC)
         cert = CertInfo(
             subject={"commonName": "x"}, issuer={},
             not_before=now - datetime.timedelta(days=1),

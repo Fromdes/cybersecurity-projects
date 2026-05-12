@@ -8,7 +8,6 @@ from pathlib import Path
 import pytest
 
 from project_48.core import (
-    DEFAULT_MAX_BYTES,
     DisallowedMimeTypeError,
     FileTooLargeError,
     MagicMismatchError,

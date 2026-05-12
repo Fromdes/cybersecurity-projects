@@ -8,15 +8,12 @@ import pytest
 
 from project_58.core import (
     ETHERTYPE_IPV4,
-    PCAP_MAGIC_LE,
     PROTOCOL_TCP,
-    PROTOCOL_UDP,
     Packet,
     PCAPAnalyser,
     PCAPReader,
     _parse_packet,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers to build synthetic frames

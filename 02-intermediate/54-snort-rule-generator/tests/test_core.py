@@ -2,15 +2,8 @@
 
 from __future__ import annotations
 
-import re
-
-import pytest
-
 from project_54.core import (
     RuleBuilder,
-    SnortRule,
-    Direction,
-    RuleValidationError,
     sql_injection_rule,
     ssh_brute_force_rule,
     validate_rule,

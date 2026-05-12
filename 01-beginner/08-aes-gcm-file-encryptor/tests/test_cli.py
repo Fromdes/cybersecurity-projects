@@ -9,7 +9,7 @@ from unittest.mock import patch
 import pytest
 
 from project_08.cli import main
-from project_08.core import decrypt_file, encrypt_file
+from project_08.core import encrypt_file
 
 _PASSWORD = "test-passphrase-cli"
 

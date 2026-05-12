@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import logging
-import time
 from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Any, Final
+from typing import Final
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +57,7 @@ class ProcessNode:
     """Node in the process tree."""
 
     info: ProcessInfo
-    children: list["ProcessNode"] = field(default_factory=list)
+    children: list[ProcessNode] = field(default_factory=list)
     depth: int = 0
 
     def render(self, indent: int = 0) -> list[str]:

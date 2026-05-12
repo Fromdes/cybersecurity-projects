@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import sys
-
 import click
 
-from project_74.core import PhishingURLClassifier, extract_features, heuristic_classify
+from project_74.core import PhishingURLClassifier
 
 
 @click.group()

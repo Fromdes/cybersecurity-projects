@@ -4,11 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from project_84.core import (
     BUILTIN_RULES,
-    SecretFinding,
     SecretsScanner,
     _is_allowlisted,
     _redact,

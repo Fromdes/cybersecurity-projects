@@ -3,17 +3,13 @@
 from __future__ import annotations
 
 import json
-import tempfile
 from pathlib import Path
-
-import pytest
 
 from project_56.core import (
     IOC,
     IOCMatcher,
     IOCStore,
     IOCType,
-    MatchResult,
     extract_iocs_from_text,
 )
 

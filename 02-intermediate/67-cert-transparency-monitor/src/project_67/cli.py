@@ -7,7 +7,7 @@ import sys
 
 import click
 
-from project_67.core import filter_entries, monitor, parse_crtsh_response, query_crtsh
+from project_67.core import monitor
 
 
 @click.group()

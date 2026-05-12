@@ -7,8 +7,6 @@ import logging
 import tempfile
 from pathlib import Path
 
-import pytest
-
 from project_51.core import (
     REDACT_PLACEHOLDER,
     StructuredFormatter,

@@ -156,7 +156,6 @@ class TestJsonValueEncoding:
         assert "<value>" not in result
 
     def test_valid_json(self) -> None:
-        import json
         # Should be parseable after stripping our extra escapes
         result = encode_json_value({"name": "Alice"})
         assert "Alice" in result

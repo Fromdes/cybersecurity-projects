@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import datetime
 
-import pytest
-
 from project_75.core import (
     AnomalyDetectorState,
     LoginEvent,
@@ -17,10 +15,9 @@ from project_75.core import (
     _check_new_ip,
     _check_unusual_hour,
     analyse_events,
-    parse_login_line,
     parse_log_file,
+    parse_login_line,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

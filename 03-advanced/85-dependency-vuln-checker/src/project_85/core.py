@@ -210,7 +210,7 @@ def query_osv_single(dep: Dependency) -> DependencyResult:
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:  # noqa: S310
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
             data = json.loads(resp.read())
     except urllib.error.URLError as exc:
         return DependencyResult(dependency=dep, vulnerabilities=[], error=str(exc))
@@ -246,7 +246,7 @@ def query_osv_batch(deps: list[Dependency]) -> list[DependencyResult]:
             method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:  # noqa: S310
+            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
                 data = json.loads(resp.read())
         except (urllib.error.URLError, json.JSONDecodeError) as exc:
             for dep in batch:

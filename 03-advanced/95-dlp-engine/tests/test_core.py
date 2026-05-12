@@ -4,12 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from project_95.core import (
     DEFAULT_RULES,
-    DLPFinding,
-    DLPReport,
     DLPRule,
     redact_text,
     scan_directory,

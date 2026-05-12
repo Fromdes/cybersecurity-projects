@@ -4,14 +4,11 @@ from __future__ import annotations
 
 import json
 
-import pytest
-
 from project_46.core import (
     CSPBuilder,
     CSPPolicy,
     CSPViolationReport,
     FetchDirective,
-    OtherDirective,
     is_valid_source_value,
     parse_policy,
 )

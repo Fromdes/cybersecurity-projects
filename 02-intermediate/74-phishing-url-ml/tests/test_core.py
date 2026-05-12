@@ -6,12 +6,10 @@ import pytest
 
 from project_74.core import (
     PhishingURLClassifier,
-    URLFeatures,
     _shannon_entropy,
     extract_features,
     heuristic_classify,
 )
-
 
 # ---------------------------------------------------------------------------
 # _shannon_entropy

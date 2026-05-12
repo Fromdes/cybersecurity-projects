@@ -8,7 +8,7 @@ from pathlib import Path
 
 import click
 
-from project_84.core import SecretsScanner, batch_scan, BUILTIN_RULES
+from project_84.core import BUILTIN_RULES, SecretsScanner, batch_scan
 
 
 @click.group()

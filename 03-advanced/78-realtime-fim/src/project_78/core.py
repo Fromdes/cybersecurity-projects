@@ -5,14 +5,13 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
-import os
 import threading
-import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +53,7 @@ class FileRecord:
         }
 
     @staticmethod
-    def from_dict(d: dict[str, Any]) -> "FileRecord":
+    def from_dict(d: dict[str, Any]) -> FileRecord:
         """Deserialize from dict."""
         return FileRecord(
             path=d["path"],
@@ -135,7 +134,7 @@ class Baseline:
                 sha256=digest,
                 size=stat.st_size,
                 mtime=stat.st_mtime,
-                recorded_at=datetime.now(timezone.utc).isoformat(),
+                recorded_at=datetime.now(UTC).isoformat(),
             )
         except OSError as exc:
             logger.warning("Cannot record %s: %s", path, exc)
@@ -152,14 +151,14 @@ class Baseline:
         """Persist baseline to JSON file."""
         data = {
             "version": BASELINE_VERSION,
-            "created_at": datetime.now(timezone.utc).isoformat(),
+            "created_at": datetime.now(UTC).isoformat(),
             "records": {k: v.to_dict() for k, v in self._records.items()},
         }
         output.write_text(json.dumps(data, indent=2))
         logger.info("Baseline saved to %s (%d records)", output, len(self._records))
 
     @classmethod
-    def load(cls, path: Path) -> "Baseline":
+    def load(cls, path: Path) -> Baseline:
         """Load baseline from JSON file."""
         data = json.loads(path.read_text())
         b = cls()
@@ -178,7 +177,7 @@ class Baseline:
                 events.append(FIMEvent(
                     event_type=EventType.DELETED,
                     path=path_str,
-                    timestamp=datetime.now(timezone.utc),
+                    timestamp=datetime.now(UTC),
                     old_hash=record.sha256,
                     details={"baseline_size": record.size},
                 ))
@@ -188,7 +187,7 @@ class Baseline:
                     events.append(FIMEvent(
                         event_type=EventType.MODIFIED,
                         path=path_str,
-                        timestamp=datetime.now(timezone.utc),
+                        timestamp=datetime.now(UTC),
                         old_hash=record.sha256,
                         new_hash=current_hash,
                     ))
@@ -230,7 +229,7 @@ try:
             fim_event = FIMEvent(
                 event_type=EventType.CREATED,
                 path=path,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 new_hash=new_hash,
             )
             self._callback(fim_event)
@@ -244,7 +243,7 @@ try:
             fim_event = FIMEvent(
                 event_type=EventType.MODIFIED,
                 path=path,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 old_hash=old_record.sha256 if old_record else "",
                 new_hash=new_hash,
             )
@@ -258,7 +257,7 @@ try:
             fim_event = FIMEvent(
                 event_type=EventType.DELETED,
                 path=path,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 old_hash=old_record.sha256 if old_record else "",
             )
             self._callback(fim_event)
@@ -269,7 +268,7 @@ try:
             fim_event = FIMEvent(
                 event_type=EventType.MOVED,
                 path=str(event.src_path),
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 details={"dest": str(event.dest_path)},
             )
             self._callback(fim_event)

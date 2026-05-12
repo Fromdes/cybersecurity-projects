@@ -10,7 +10,6 @@ from click.testing import CliRunner
 
 from project_92.cli import cli
 
-
 PUBLIC_POLICY = {
     "Version": "2012-10-17",
     "Statement": [

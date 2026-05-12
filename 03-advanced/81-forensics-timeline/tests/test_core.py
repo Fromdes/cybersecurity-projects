@@ -4,11 +4,8 @@ from __future__ import annotations
 
 import csv
 import json
-import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
-import pytest
 
 from project_81.core import (
     ForensicsTimeline,
@@ -31,7 +28,7 @@ def make_event(ts: datetime, source: str = "test", event_type: str = "TEST") -> 
 
 class TestTimelineEvent:
     def test_round_trip(self) -> None:
-        ts = datetime(2024, 5, 12, 10, 0, 0, tzinfo=timezone.utc)
+        ts = datetime(2024, 5, 12, 10, 0, 0, tzinfo=UTC)
         ev = TimelineEvent(
             timestamp=ts,
             source="fs",
@@ -110,16 +107,16 @@ class TestCollectGenericLogEvents:
 class TestForensicsTimeline:
     def test_add_events_count(self) -> None:
         timeline = ForensicsTimeline()
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         events = [make_event(ts) for _ in range(5)]
         count = timeline.add_events(iter(events))
         assert count == 5
 
     def test_sorted_order(self) -> None:
         timeline = ForensicsTimeline()
-        t1 = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        t2 = datetime(2024, 6, 1, tzinfo=timezone.utc)
-        t3 = datetime(2024, 3, 1, tzinfo=timezone.utc)
+        t1 = datetime(2024, 1, 1, tzinfo=UTC)
+        t2 = datetime(2024, 6, 1, tzinfo=UTC)
+        t3 = datetime(2024, 3, 1, tzinfo=UTC)
         for ts in (t2, t1, t3):
             timeline._events.append(make_event(ts))
         sorted_ev = timeline.sorted_events()
@@ -128,7 +125,7 @@ class TestForensicsTimeline:
 
     def test_to_jsonl(self, tmp_path: Path) -> None:
         timeline = ForensicsTimeline()
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         timeline._events.append(make_event(ts))
         out = tmp_path / "timeline.jsonl"
         count = timeline.to_jsonl(out)
@@ -139,7 +136,7 @@ class TestForensicsTimeline:
 
     def test_to_csv(self, tmp_path: Path) -> None:
         timeline = ForensicsTimeline()
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         timeline._events.append(make_event(ts))
         out = tmp_path / "timeline.csv"
         count = timeline.to_csv(out)
@@ -154,8 +151,8 @@ class TestForensicsTimeline:
 
     def test_summary_populated(self) -> None:
         timeline = ForensicsTimeline()
-        t1 = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        t2 = datetime(2024, 6, 1, tzinfo=timezone.utc)
+        t1 = datetime(2024, 1, 1, tzinfo=UTC)
+        t2 = datetime(2024, 6, 1, tzinfo=UTC)
         timeline._events.extend([
             make_event(t1, source="filesystem"),
             make_event(t2, source="syslog"),
@@ -167,7 +164,7 @@ class TestForensicsTimeline:
 
     def test_source_filter(self) -> None:
         timeline = ForensicsTimeline()
-        ts = datetime.now(timezone.utc)
+        ts = datetime.now(UTC)
         timeline._events.extend([
             make_event(ts, source="filesystem"),
             make_event(ts, source="syslog"),

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -111,7 +110,7 @@ class YARAScanner:
         matches: list[RuleMatch] = []
         try:
             raw_matches = self.compiled_rules.match(str(file_path), timeout=self.timeout)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             logger.warning("YARA scan error on %s: %s", file_path, exc)
             return []
 

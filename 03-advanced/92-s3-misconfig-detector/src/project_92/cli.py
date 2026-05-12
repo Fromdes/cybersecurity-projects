@@ -48,8 +48,9 @@ def check_cmd(
     """Check an S3 bucket policy JSON file for misconfigurations."""
     analysis = analyze_policy_file(policy_file)
     if bucket_name:
-        from project_92.core import analyze_bucket_policy
         import json as _json
+
+        from project_92.core import analyze_bucket_policy
         policy = _json.loads(policy_file.read_text())
         analysis = analyze_bucket_policy(policy, bucket_name=bucket_name, source=str(policy_file))
     click.echo(f"Bucket: {analysis.bucket_name}  ({analysis.statement_count} statement(s))")

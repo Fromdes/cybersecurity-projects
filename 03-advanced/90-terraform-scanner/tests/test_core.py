@@ -4,11 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from project_90.core import (
     HCLBlock,
-    ScanReport,
     check_cloudtrail_logging,
     check_ec2_imdsv2,
     check_hardcoded_secrets,
@@ -23,7 +20,6 @@ from project_90.core import (
     scan_directory,
     scan_file,
 )
-
 
 # ── parse_hcl_blocks ──────────────────────────────────────────────────────────
 

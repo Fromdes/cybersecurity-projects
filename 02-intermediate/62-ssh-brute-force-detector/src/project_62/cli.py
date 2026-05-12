@@ -8,7 +8,7 @@ from pathlib import Path
 
 import click
 
-from .core import analyse_auth_log, parse_line, BruteForceDetector
+from .core import BruteForceDetector, analyse_auth_log, parse_line
 
 
 @click.group()

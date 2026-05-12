@@ -3,12 +3,10 @@
 from __future__ import annotations
 
 import json
-import math
 import statistics
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
 
 # ── Keystroke event ───────────────────────────────────────────────────────────
 
@@ -110,7 +108,7 @@ class BehavioralProfile:
         }
 
     @staticmethod
-    def from_dict(data: dict[str, Any]) -> "BehavioralProfile":
+    def from_dict(data: dict[str, Any]) -> BehavioralProfile:
         """Deserialize from dict."""
         stats = {k: FeatureStat(v["mean"], v["std"]) for k, v in data["stats"].items()}
         return BehavioralProfile(

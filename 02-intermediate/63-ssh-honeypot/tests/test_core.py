@@ -3,16 +3,13 @@
 from __future__ import annotations
 
 import socket
-import time
 import threading
-
-import pytest
+import time
 
 from project_63.core import (
     HoneypotEvent,
     HoneypotLogger,
     SSHHoneypotServer,
-    BANNER,
 )
 
 

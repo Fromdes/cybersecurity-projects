@@ -2,12 +2,8 @@
 
 from __future__ import annotations
 
-import pytest
-
 from project_60.core import (
-    ProcessAnomalyAlert,
     ProcessInfo,
-    ProcessNode,
     build_process_tree,
     detect_anomalies,
 )

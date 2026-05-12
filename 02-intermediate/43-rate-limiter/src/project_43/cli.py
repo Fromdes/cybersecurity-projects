@@ -3,13 +3,11 @@
 from __future__ import annotations
 
 import json
-import time
 
 import click
 
 from project_43.core import (
     FixedWindowLimiter,
-    LimitResult,
     SlidingWindowLimiter,
     TokenBucketLimiter,
 )

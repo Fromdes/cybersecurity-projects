@@ -46,7 +46,6 @@ class TestCLI:
         assert code == 1
 
     def test_no_special_flag(self, capsys: pytest.CaptureFixture[str]) -> None:
-        import string
         from project_05.core import CHARS_SPECIAL
         code, out, _ = _run(["--no-special", "--length", "50", "--count", "5"], capsys)
         assert code == 0

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-
 from project_62.core import (
     BruteForceDetector,
     LoginAttempt,

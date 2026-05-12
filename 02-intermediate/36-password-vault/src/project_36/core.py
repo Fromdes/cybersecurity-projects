@@ -7,7 +7,7 @@ import secrets
 import string
 import uuid
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from argon2.low_level import Type, hash_secret_raw
@@ -42,9 +42,9 @@ class VaultEntry:
     modified_at: str
 
     @staticmethod
-    def new(site: str, username: str, password: str, notes: str = "") -> "VaultEntry":
+    def new(site: str, username: str, password: str, notes: str = "") -> VaultEntry:
         """Create a new VaultEntry with generated ID and timestamps."""
-        now = datetime.now(tz=timezone.utc).isoformat()
+        now = datetime.now(tz=UTC).isoformat()
         return VaultEntry(
             id=str(uuid.uuid4()), site=site, username=username,
             password=password, notes=notes,
@@ -232,7 +232,7 @@ class Vault:
             password=kwargs.get("password", entry.password),
             notes=kwargs.get("notes", entry.notes),
             created_at=entry.created_at,
-            modified_at=datetime.now(tz=timezone.utc).isoformat(),
+            modified_at=datetime.now(tz=UTC).isoformat(),
         )
         self._entries[idx] = updated
         self._save()

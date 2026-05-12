@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import datetime
 import socket
 import ssl
-import datetime
 from dataclasses import dataclass, field
 from typing import Final
 
@@ -59,10 +59,10 @@ class CertInfo:
     @property
     def days_until_expiry(self) -> int:
         """Return days until certificate expires (negative if already expired)."""
-        now = datetime.datetime.now(tz=datetime.timezone.utc)
+        now = datetime.datetime.now(tz=datetime.UTC)
         expiry = self.not_after
         if expiry.tzinfo is None:
-            expiry = expiry.replace(tzinfo=datetime.timezone.utc)
+            expiry = expiry.replace(tzinfo=datetime.UTC)
         delta = expiry - now
         return delta.days
 
@@ -140,8 +140,8 @@ def _parse_cert(cert: dict) -> CertInfo:  # type: ignore[type-arg]
     return CertInfo(
         subject=subject,
         issuer=issuer,
-        not_before=datetime.datetime.fromtimestamp(not_before, tz=datetime.timezone.utc),
-        not_after=datetime.datetime.fromtimestamp(not_after, tz=datetime.timezone.utc),
+        not_before=datetime.datetime.fromtimestamp(not_before, tz=datetime.UTC),
+        not_after=datetime.datetime.fromtimestamp(not_after, tz=datetime.UTC),
         san=san,
         serial_number=str(cert.get("serialNumber", "")),
         signature_algorithm=cert.get("signatureAlgorithm", "unknown"),
@@ -190,7 +190,7 @@ def audit_tls(host: str, port: int = 443, *, timeout: int = DEFAULT_TIMEOUT) -> 
     except ssl.SSLCertVerificationError as exc:
         result.add_finding("critical", f"Certificate verification failed: {exc}", deduction=40)
         return result
-    except (socket.timeout, TimeoutError):
+    except TimeoutError:
         result.add_finding("info", f"Connection timed out after {timeout}s")
         return result
     except (OSError, ssl.SSLError) as exc:

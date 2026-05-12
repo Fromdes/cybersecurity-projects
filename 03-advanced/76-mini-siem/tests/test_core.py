@@ -3,27 +3,25 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-import pytest
-
 from project_76.core import (
+    BUILTIN_RULES,
     Alert,
     AlertStore,
     ApacheParser,
-    BUILTIN_RULES,
     DetectionRule,
     LogEvent,
-    SIEMEngine,
     Severity,
+    SIEMEngine,
     SyslogParser,
     get_parser,
 )
 
 
 def make_event(message: str, source: str = "test") -> LogEvent:
-    ts = datetime.now(timezone.utc)
+    ts = datetime.now(UTC)
     return LogEvent(
         event_id=LogEvent._make_id(message, ts),
         timestamp=ts,

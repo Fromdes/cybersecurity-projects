@@ -305,7 +305,7 @@ class RBACEngine:
         }
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "RBACEngine":
+    def from_dict(cls, data: dict[str, Any]) -> RBACEngine:
         """Load engine from a plain dict (inverse of to_dict).
 
         Args:
@@ -319,7 +319,7 @@ class RBACEngine:
             role = engine.add_role(name, parents=rdata.get("parents", []))
             for perm_str in rdata.get("permissions", []):
                 parts = perm_str.split(":", 1)
-                if len(parts) == 2:  # noqa: PLR2004
+                if len(parts) == 2:
                     role.add_permission(parts[0], parts[1])
         for uid, udata in data.get("users", {}).items():
             user = engine.add_user(uid)
@@ -329,7 +329,7 @@ class RBACEngine:
         return engine
 
     @classmethod
-    def from_yaml(cls, yaml_text: str) -> "RBACEngine":
+    def from_yaml(cls, yaml_text: str) -> RBACEngine:
         """Load engine from YAML text.
 
         Args:

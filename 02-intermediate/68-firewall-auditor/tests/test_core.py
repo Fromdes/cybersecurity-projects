@@ -2,17 +2,13 @@
 
 from __future__ import annotations
 
-import pytest
-
 from project_68.core import (
-    AuditFinding,
     FirewallRule,
     _parse_port,
     audit_rules,
     parse_iptables_line,
     parse_iptables_output,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helper factory

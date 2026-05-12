@@ -7,7 +7,7 @@ import sys
 
 import click
 
-from .core import CSRFService, extract_token
+from .core import CSRFService
 
 
 def _get_service() -> CSRFService:
@@ -39,7 +39,7 @@ def validate_cmd(session_id: str, token: str) -> None:
     try:
         svc.validate_token(session_id, token)
         click.echo("[ok] Token valid.")
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         click.echo(f"[fail] {exc}", err=True)
         sys.exit(1)
 

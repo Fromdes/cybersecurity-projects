@@ -59,19 +59,19 @@ class CTLogEntry:
     @property
     def is_expired(self) -> bool:
         """Return True if the certificate is currently expired."""
-        now = datetime.datetime.now(tz=datetime.timezone.utc)
+        now = datetime.datetime.now(tz=datetime.UTC)
         expiry = self.not_after
         if expiry.tzinfo is None:
-            expiry = expiry.replace(tzinfo=datetime.timezone.utc)
+            expiry = expiry.replace(tzinfo=datetime.UTC)
         return now > expiry
 
     @property
     def days_until_expiry(self) -> int:
         """Days until certificate expires (negative if already expired)."""
-        now = datetime.datetime.now(tz=datetime.timezone.utc)
+        now = datetime.datetime.now(tz=datetime.UTC)
         expiry = self.not_after
         if expiry.tzinfo is None:
-            expiry = expiry.replace(tzinfo=datetime.timezone.utc)
+            expiry = expiry.replace(tzinfo=datetime.UTC)
         return (expiry - now).days
 
 
@@ -80,7 +80,7 @@ class CTMonitorResult:
     """Results from a CT log monitoring query."""
 
     domain: str
-    queried_at: datetime.datetime = field(default_factory=lambda: datetime.datetime.now(tz=datetime.timezone.utc))
+    queried_at: datetime.datetime = field(default_factory=lambda: datetime.datetime.now(tz=datetime.UTC))
     entries: list[CTLogEntry] = field(default_factory=list)
     anomalies: list[str] = field(default_factory=list)
 
@@ -130,7 +130,7 @@ def _parse_dt(value: str) -> datetime.datetime:
     for fmt in _DT_FORMATS:
         try:
             dt = datetime.datetime.strptime(value, fmt)
-            return dt.replace(tzinfo=datetime.timezone.utc)
+            return dt.replace(tzinfo=datetime.UTC)
         except ValueError:
             continue
     raise ValueError(f"Cannot parse datetime: {value!r}")
@@ -195,8 +195,8 @@ def query_crtsh(domain: str, *, timeout: int = DEFAULT_TIMEOUT) -> list[dict]:  
 
     params = urlencode({"q": domain, "output": "json"})
     url = f"{CRTSH_API_URL}?{params}"
-    req = Request(url, headers={"User-Agent": "ct-monitor/1.0 (defensive-security)"})  # noqa: S310
-    with urlopen(req, timeout=timeout) as resp:  # noqa: S310
+    req = Request(url, headers={"User-Agent": "ct-monitor/1.0 (defensive-security)"})
+    with urlopen(req, timeout=timeout) as resp:
         raw = resp.read()
     return json.loads(raw)  # type: ignore[no-any-return]
 
@@ -229,7 +229,7 @@ def detect_anomalies(result: CTMonitorResult, *, watched_issuers: list[str] | No
                 )
 
     # Flag certificates issued very recently (within 24 h) for monitoring
-    recent_cutoff = datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(hours=24)
+    recent_cutoff = datetime.datetime.now(tz=datetime.UTC) - datetime.timedelta(hours=24)
     recent = [e for e in result.entries if e.logged_at >= recent_cutoff]
     if len(recent) >= 5:
         result.anomalies.append(

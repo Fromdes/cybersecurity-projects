@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import sys
 from pathlib import Path
 
 import click
 
-from project_78.core import Baseline, FIMEventLog, FIMWatcher, WATCHDOG_AVAILABLE
+from project_78.core import WATCHDOG_AVAILABLE, Baseline, FIMEventLog, FIMWatcher
 
 logging.basicConfig(
     level=logging.INFO,

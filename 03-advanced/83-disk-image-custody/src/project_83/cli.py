@@ -58,7 +58,7 @@ def verify_cmd(image_file: Path, expected_sha256: str) -> None:
     if matches:
         click.echo(click.style("PASS", fg="green") + f" SHA-256 matches: {actual}")
     else:
-        click.echo(click.style("FAIL", fg="red") + f" Hash mismatch!")
+        click.echo(click.style("FAIL", fg="red") + " Hash mismatch!")
         click.echo(f"  Expected: {expected_sha256}")
         click.echo(f"  Actual:   {actual}")
         sys.exit(1)
@@ -85,7 +85,7 @@ def acquire_cmd(image_file: Path, custody_file: Path, notes: str) -> None:
 def transfer_cmd(custody_file: Path, image_file: Path, notes: str) -> None:
     """Record a custody transfer event (re-verifies hash integrity)."""
     record = CustodyRecord.load(custody_file)
-    click.echo(f"Verifying image before transfer …")
+    click.echo("Verifying image before transfer …")
     matches, actual = verify_image(image_file, record.hash_result.sha256)
     if not matches:
         click.echo(click.style("INTEGRITY CHECK FAILED", fg="red"), err=True)

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import email
 import email.policy
-import math
 import re
 from dataclasses import dataclass, field
 from email.message import EmailMessage

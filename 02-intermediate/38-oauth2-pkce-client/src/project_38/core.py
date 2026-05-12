@@ -168,7 +168,7 @@ def exchange_code_for_tokens(
 
     try:
         response.raise_for_status()
-    except requests.HTTPError as exc:
+    except requests.HTTPError:
         logger.error("Token exchange failed status=%s body=%s", response.status_code, response.text[:200])
         raise
 

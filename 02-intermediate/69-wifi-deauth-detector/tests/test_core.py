@@ -4,15 +4,12 @@ from __future__ import annotations
 
 import struct
 
-import pytest
-
 from project_69.core import (
     BROADCAST_MAC,
     DOT11_SUBTYPE_DEAUTH,
     DOT11_SUBTYPE_DISASSOC,
     LINKTYPE_IEEE80211,
     LINKTYPE_IEEE80211_RADIOTAP,
-    PCAP_MAGIC_LE,
     DeauthDetectorState,
     DeauthEvent,
     _mac_from_bytes,
@@ -23,7 +20,6 @@ from project_69.core import (
     read_pcap_frames,
     strip_radiotap,
 )
-
 
 # ---------------------------------------------------------------------------
 # Synthetic frame builders

@@ -4,15 +4,13 @@ from __future__ import annotations
 
 import struct
 
-import pytest
-
 from project_71.core import (
     DHCP_ACK,
+    DHCP_CLIENT_PORT,
     DHCP_MAGIC_COOKIE,
     DHCP_OFFER,
     DHCP_REQUEST,
     DHCP_SERVER_PORT,
-    DHCP_CLIENT_PORT,
     ETHERTYPE_IP,
     OPT_DNS,
     OPT_END,
@@ -29,9 +27,7 @@ from project_71.core import (
     parse_dhcp_options,
     parse_dhcp_packet,
     process_packet,
-    read_pcap_frames,
 )
-
 
 # ---------------------------------------------------------------------------
 # Synthetic frame builder

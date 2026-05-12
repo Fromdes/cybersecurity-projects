@@ -6,7 +6,6 @@ import pytest
 
 from project_39.core import Permission, RBACEngine
 
-
 SAMPLE_YAML = """
 roles:
   viewer:

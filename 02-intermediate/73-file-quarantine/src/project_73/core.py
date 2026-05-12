@@ -6,9 +6,8 @@ import hashlib
 import json
 import os
 import shutil
-import stat
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Final
 
@@ -46,7 +45,7 @@ class QuarantineEntry:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: dict[str, object]) -> "QuarantineEntry":
+    def from_dict(cls, data: dict[str, object]) -> QuarantineEntry:
         """Deserialise from a JSON-compatible dict."""
         return cls(**data)  # type: ignore[arg-type]
 

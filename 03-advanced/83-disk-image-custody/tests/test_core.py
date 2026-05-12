@@ -6,8 +6,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import pytest
-
 from project_83.core import (
     CustodyRecord,
     HashResult,
@@ -23,8 +21,8 @@ class TestHashImage:
         f = tmp_path / "image.dd"
         f.write_bytes(content)
         result = hash_image(f)
-        assert result.md5 == hashlib.md5(content).hexdigest()  # noqa: S324
-        assert result.sha1 == hashlib.sha1(content).hexdigest()  # noqa: S324
+        assert result.md5 == hashlib.md5(content).hexdigest()
+        assert result.sha1 == hashlib.sha1(content).hexdigest()
         assert result.sha256 == hashlib.sha256(content).hexdigest()
         assert result.sha512 == hashlib.sha512(content).hexdigest()
 

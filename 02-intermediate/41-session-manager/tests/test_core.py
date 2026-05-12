@@ -7,7 +7,6 @@ import time
 import pytest
 
 from project_41.core import (
-    MAX_SESSIONS_PER_USER,
     SessionStatus,
     SessionStore,
 )

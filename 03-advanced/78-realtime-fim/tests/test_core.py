@@ -3,20 +3,17 @@
 from __future__ import annotations
 
 import json
-import time
+from datetime import UTC, datetime
 from pathlib import Path
-
-import pytest
 
 from project_78.core import (
     Baseline,
     EventType,
+    FileRecord,
     FIMEvent,
     FIMEventLog,
-    FileRecord,
     hash_file,
 )
-from datetime import datetime, timezone
 
 
 class TestHashFile:
@@ -130,7 +127,7 @@ class TestFIMEvent:
         ev = FIMEvent(
             event_type=EventType.MODIFIED,
             path="/etc/hosts",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             old_hash="aaa",
             new_hash="bbb",
         )
@@ -143,7 +140,7 @@ class TestFIMEvent:
 class TestFIMEventLog:
     def test_record_and_get(self) -> None:
         log = FIMEventLog()
-        ev = FIMEvent(EventType.CREATED, "/tmp/new.txt", datetime.now(timezone.utc))
+        ev = FIMEvent(EventType.CREATED, "/tmp/new.txt", datetime.now(UTC))
         log.record(ev)
         all_events = log.get_all()
         assert len(all_events) == 1
@@ -151,7 +148,7 @@ class TestFIMEventLog:
     def test_persistence(self, tmp_path: Path) -> None:
         out = tmp_path / "events.jsonl"
         log = FIMEventLog(output_path=out)
-        ev = FIMEvent(EventType.DELETED, "/tmp/del.txt", datetime.now(timezone.utc))
+        ev = FIMEvent(EventType.DELETED, "/tmp/del.txt", datetime.now(UTC))
         log.record(ev)
         assert out.exists()
         obj = json.loads(out.read_text().strip())

@@ -4,8 +4,8 @@ from project_14.core import (
     HashAlgorithm,
     HashResult,
     hash_password,
-    verify_password,
     needs_rehash,
+    verify_password,
 )
 
-__all__ = ["HashAlgorithm", "HashResult", "hash_password", "verify_password", "needs_rehash"]
+__all__ = ["HashAlgorithm", "HashResult", "hash_password", "needs_rehash", "verify_password"]

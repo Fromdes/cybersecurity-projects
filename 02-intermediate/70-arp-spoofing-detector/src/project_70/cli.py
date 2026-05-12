@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import sys
-
 import click
 
 from project_70.core import analyse_arp_log, analyse_pcap
@@ -36,9 +34,8 @@ def neigh(log_file: str) -> None:
     _print_results(table)
 
 
-def _print_results(table: "project_70.core.ARPTable") -> None:  # type: ignore[name-defined]  # noqa: F821
-    from project_70.core import ARPTable
-    click.echo(f"\nARP Spoofing Analysis")
+def _print_results(table: project_70.core.ARPTable) -> None:  # type: ignore[name-defined]  # noqa: F821
+    click.echo("\nARP Spoofing Analysis")
     click.echo(f"  Conflicts detected: {len(table.conflicts)}")
     susp = table.suspicious_macs()
     click.echo(f"  Suspicious MACs  : {len(susp)}")

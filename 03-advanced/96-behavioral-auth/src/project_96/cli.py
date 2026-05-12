@@ -9,10 +9,7 @@ from pathlib import Path
 import click
 
 from project_96.core import (
-    BehavioralProfile,
-    KeyEvent,
     build_profile,
-    extract_features,
     generate_synthetic_sample,
     load_profile,
     save_profile,
@@ -91,11 +88,10 @@ def verify_cmd(user: str, sample_file: Path | None, profile_dir: Path, exit_code
 @click.option("--user", default="demo-user", show_default=True)
 def demo_cmd(user: str) -> None:
     """Run a self-contained enrollment + verification demo."""
-    import tempfile
 
     passphrase = "security"
     keys = list(passphrase)
-    click.echo(f"=== Behavioral Auth Demo ===")
+    click.echo("=== Behavioral Auth Demo ===")
     click.echo(f"Passphrase: {passphrase!r}")
 
     click.echo("\n[1] Enrolling with 10 consistent samples...")

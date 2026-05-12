@@ -4,14 +4,12 @@ from __future__ import annotations
 
 import base64
 import hashlib
-import json
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 import requests
 
 from project_38.core import (
-    PKCEChallenge,
     build_authorization_url,
     describe_pkce,
     exchange_code_for_tokens,

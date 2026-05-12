@@ -8,7 +8,7 @@ from pathlib import Path
 
 import click
 
-from project_80.core import MacroAnalyzer, SUPPORTED_EXTENSIONS
+from project_80.core import SUPPORTED_EXTENSIONS, MacroAnalyzer
 
 logging.basicConfig(
     level=logging.INFO,
@@ -55,7 +55,7 @@ def analyze_cmd(file: Path, output: Path | None, show_vba: bool) -> None:
         click.echo("\nNo risk indicators found.")
 
     color = "green" if result.risk_score < 25 else ("yellow" if result.risk_score < 50 else "red")
-    click.echo(f"\nRisk score: " + click.style(str(result.risk_score), fg=color))
+    click.echo("\nRisk score: " + click.style(str(result.risk_score), fg=color))
     if result.error:
         click.echo(f"Error: {result.error}", err=True)
 

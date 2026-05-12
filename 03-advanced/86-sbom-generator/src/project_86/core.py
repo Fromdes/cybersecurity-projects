@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -180,12 +179,12 @@ class SBOMDocument:
     source_manifest: str
 
     @classmethod
-    def from_components(cls, components: list[Component], source: str) -> "SBOMDocument":
+    def from_components(cls, components: list[Component], source: str) -> SBOMDocument:
         """Create SBOM from a list of components."""
         return cls(
             serial_number=f"urn:uuid:{uuid.uuid4()}",
             version=1,
-            metadata_timestamp=datetime.now(timezone.utc).isoformat(),
+            metadata_timestamp=datetime.now(UTC).isoformat(),
             components=components,
             source_manifest=source,
         )

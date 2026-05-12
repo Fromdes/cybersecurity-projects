@@ -10,7 +10,6 @@ from click.testing import CliRunner
 
 from project_95.cli import cli
 
-
 SENSITIVE_TEXT = """\
 Name: Alice Smith
 Email: alice@example.com

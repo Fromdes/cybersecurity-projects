@@ -5,11 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from project_92.core import (
-    BucketAnalysis,
-    S3Finding,
     analyze_bucket_policy,
     analyze_policy_file,
     check_public_acl_change,
@@ -26,7 +22,6 @@ def _stmt(effect: str, principal: Any, actions: Any, resources: Any = "*", sid: 
 
 
 from typing import Any
-
 
 # ── check_public_read ─────────────────────────────────────────────────────────
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 import pytest
 
 from project_59.core import (
-    DGAVerdict,
     analyse_domain_list,
     bigram_score,
     classify_domain,

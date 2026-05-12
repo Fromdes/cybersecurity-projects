@@ -7,9 +7,8 @@ import json
 import logging
 import re
 import threading
-import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -134,7 +133,7 @@ def detect_suspicious_cmdline(snapshot: ProcessSnapshot) -> Finding | None:
             fid = Finding.make_id("suspicious_cmdline", f"{snapshot.pid}{pattern}")
             return Finding(
                 finding_id=fid,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 threat_level=ThreatLevel.HIGH,
                 category="suspicious_cmdline",
                 description=f"Suspicious command pattern '{pattern}' in PID {snapshot.pid}",
@@ -150,7 +149,7 @@ def detect_privileged_execution(snapshot: ProcessSnapshot) -> Finding | None:
         fid = Finding.make_id("privilege_exec", f"{snapshot.pid}{snapshot.name}")
         return Finding(
             finding_id=fid,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             threat_level=ThreatLevel.MEDIUM,
             category="privilege_execution",
             description=f"Privileged process '{snapshot.name}' running (PID {snapshot.pid})",
@@ -166,7 +165,7 @@ def detect_suspicious_connections(snapshot: ProcessSnapshot) -> Finding | None:
         fid = Finding.make_id("conn_flood", f"{snapshot.pid}{snapshot.connections}")
         return Finding(
             finding_id=fid,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             threat_level=ThreatLevel.MEDIUM,
             category="connection_flood",
             description=f"PID {snapshot.pid} ({snapshot.name}) has {snapshot.connections} connections",
@@ -185,7 +184,7 @@ def detect_suspicious_listening_ports() -> list[Finding]:
                 fid = Finding.make_id("suspicious_port", str(conn.laddr.port))
                 findings.append(Finding(
                     finding_id=fid,
-                    timestamp=datetime.now(timezone.utc),
+                    timestamp=datetime.now(UTC),
                     threat_level=ThreatLevel.HIGH,
                     category="suspicious_port",
                     description=f"Process listening on suspicious port {conn.laddr.port}",
@@ -205,7 +204,7 @@ def detect_hidden_processes(snapshots: list[ProcessSnapshot]) -> list[Finding]:
             fid = Finding.make_id("hidden_proc", str(snap.pid))
             findings.append(Finding(
                 finding_id=fid,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 threat_level=ThreatLevel.HIGH,
                 category="hidden_process",
                 description=f"Process PID {snap.pid} ({snap.name}) has no executable path",

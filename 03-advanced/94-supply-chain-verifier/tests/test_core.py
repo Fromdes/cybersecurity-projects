@@ -9,16 +9,12 @@ from pathlib import Path
 import pytest
 
 from project_94.core import (
-    ChecksumEntry,
-    SLSAProvenance,
-    VerificationResult,
     hash_artifact,
     parse_checksums_file,
     parse_slsa_attestation,
     verify_artifact,
     verify_hash,
 )
-
 
 # ── hash_artifact / verify_hash ───────────────────────────────────────────────
 

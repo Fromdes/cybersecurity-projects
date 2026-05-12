@@ -10,7 +10,6 @@ from click.testing import CliRunner
 
 from project_90.cli import cli
 
-
 DANGEROUS_TF = '''\
 resource "aws_s3_bucket" "bad" {
   acl = "public-read"

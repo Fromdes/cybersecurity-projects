@@ -199,29 +199,29 @@ class RuleBuilder:
         RuleBuilder._sid_counter += 1
         self._sid = RuleBuilder._sid_counter
 
-    def action(self, action: str) -> "RuleBuilder":
+    def action(self, action: str) -> RuleBuilder:
         self._action = action
         return self
 
-    def protocol(self, proto: str) -> "RuleBuilder":
+    def protocol(self, proto: str) -> RuleBuilder:
         self._proto = proto
         return self
 
-    def src(self, addr: str, port: str = "any") -> "RuleBuilder":
+    def src(self, addr: str, port: str = "any") -> RuleBuilder:
         self._src_addr = addr
         self._src_port = port
         return self
 
-    def dst(self, addr: str, port: str = "any") -> "RuleBuilder":
+    def dst(self, addr: str, port: str = "any") -> RuleBuilder:
         self._dst_addr = addr
         self._dst_port = port
         return self
 
-    def bidirectional(self) -> "RuleBuilder":
+    def bidirectional(self) -> RuleBuilder:
         self._direction = Direction.BIDIRECTIONAL
         return self
 
-    def msg(self, message: str) -> "RuleBuilder":
+    def msg(self, message: str) -> RuleBuilder:
         self._msg = message
         return self
 
@@ -229,34 +229,34 @@ class RuleBuilder:
         self, pattern: str, nocase: bool = False,
         offset: int | None = None, depth: int | None = None,
         http_uri: bool = False, http_header: bool = False,
-    ) -> "RuleBuilder":
+    ) -> RuleBuilder:
         self._content_options.append(ContentOption(
             pattern=pattern, nocase=nocase, offset=offset, depth=depth,
             http_uri=http_uri, http_header=http_header,
         ))
         return self
 
-    def pcre(self, pattern: str, flags: str = "") -> "RuleBuilder":
+    def pcre(self, pattern: str, flags: str = "") -> RuleBuilder:
         self._pcre_options.append(PcreOption(pattern=pattern, flags=flags))
         return self
 
-    def flow(self, flow: str) -> "RuleBuilder":
+    def flow(self, flow: str) -> RuleBuilder:
         self._flow = flow
         return self
 
-    def classtype(self, ct: str) -> "RuleBuilder":
+    def classtype(self, ct: str) -> RuleBuilder:
         self._classtype = ct
         return self
 
-    def priority(self, p: int) -> "RuleBuilder":
+    def priority(self, p: int) -> RuleBuilder:
         self._priority = p
         return self
 
-    def reference(self, ref: str) -> "RuleBuilder":
+    def reference(self, ref: str) -> RuleBuilder:
         self._reference = ref
         return self
 
-    def threshold(self, kind: str, count: int, seconds: int) -> "RuleBuilder":
+    def threshold(self, kind: str, count: int, seconds: int) -> RuleBuilder:
         self._threshold_type = kind
         self._threshold_count = count
         self._threshold_seconds = seconds

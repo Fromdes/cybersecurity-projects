@@ -2,14 +2,13 @@
 from __future__ import annotations
 
 import sqlite3
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
 
 from project_33.core import (
     TRACKER_PATTERNS,
-    HistoryEntry,
     ScanResult,
     _chrome_time_to_dt,
     _firefox_time_to_dt,
@@ -65,7 +64,7 @@ def _create_firefox_db(profile_path: Path) -> Path:
 class TestChromeTimeConversion:
     def test_zero_returns_epoch(self) -> None:
         dt = _chrome_time_to_dt(0)
-        assert dt == datetime(1970, 1, 1, tzinfo=timezone.utc)
+        assert dt == datetime(1970, 1, 1, tzinfo=UTC)
 
     def test_nonzero_returns_datetime(self) -> None:
         dt = _chrome_time_to_dt(13_296_009_600_000_000)
@@ -76,7 +75,7 @@ class TestChromeTimeConversion:
 class TestFirefoxTimeConversion:
     def test_zero_returns_epoch(self) -> None:
         dt = _firefox_time_to_dt(0)
-        assert dt == datetime(1970, 1, 1, tzinfo=timezone.utc)
+        assert dt == datetime(1970, 1, 1, tzinfo=UTC)
 
     def test_nonzero_returns_datetime(self) -> None:
         dt = _firefox_time_to_dt(1_672_531_200_000_000)

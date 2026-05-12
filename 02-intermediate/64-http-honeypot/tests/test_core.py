@@ -4,13 +4,9 @@ from __future__ import annotations
 
 import time
 
-import pytest
-
 from project_64.core import (
-    HONEYPOT_PATHS,
     HTTPHoneypotLogger,
     HTTPRequest,
-    ThreatClassification,
     classify_request,
 )
 

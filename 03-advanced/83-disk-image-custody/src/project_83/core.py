@@ -8,7 +8,7 @@ import json
 import os
 import socket
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -44,7 +44,7 @@ class HashResult:
         }
 
     @staticmethod
-    def from_dict(d: dict[str, Any]) -> "HashResult":
+    def from_dict(d: dict[str, Any]) -> HashResult:
         """Deserialize from dict."""
         return HashResult(
             file_path=d["file_path"],
@@ -82,7 +82,7 @@ class CustodyEntry:
         }
 
     @staticmethod
-    def from_dict(d: dict[str, Any]) -> "CustodyEntry":
+    def from_dict(d: dict[str, Any]) -> CustodyEntry:
         """Deserialize from dict."""
         return CustodyEntry(
             action=d["action"],
@@ -109,7 +109,7 @@ class CustodyRecord:
         entry = CustodyEntry(
             action=action,
             actor=_get_actor(),
-            timestamp=datetime.now(timezone.utc).isoformat(),
+            timestamp=datetime.now(UTC).isoformat(),
             location=socket.gethostname(),
             notes=notes,
             hash_at_time=current_sha256,
@@ -130,7 +130,7 @@ class CustodyRecord:
         output.write_text(json.dumps(self.to_dict(), indent=2))
 
     @classmethod
-    def load(cls, path: Path) -> "CustodyRecord":
+    def load(cls, path: Path) -> CustodyRecord:
         """Load custody record from JSON file."""
         data = json.loads(path.read_text())
         return cls(
@@ -161,8 +161,8 @@ def hash_image(file_path: Path, progress_callback: Any = None) -> HashResult:
     Returns:
         HashResult with all four digests.
     """
-    md5 = hashlib.md5()  # noqa: S324
-    sha1 = hashlib.sha1()  # noqa: S324
+    md5 = hashlib.md5()
+    sha1 = hashlib.sha1()
     sha256 = hashlib.sha256()
     sha512 = hashlib.sha512()
 
@@ -189,7 +189,7 @@ def hash_image(file_path: Path, progress_callback: Any = None) -> HashResult:
         sha1=sha1.hexdigest(),
         sha256=sha256.hexdigest(),
         sha512=sha512.hexdigest(),
-        computed_at=datetime.now(timezone.utc).isoformat(),
+        computed_at=datetime.now(UTC).isoformat(),
     )
 
 

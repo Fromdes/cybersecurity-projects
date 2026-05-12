@@ -102,14 +102,14 @@ def frequency_analysis(text: str) -> dict[str, float]:
     Returns:
         Mapping from uppercase letter to percentage of total letters.
     """
-    counts: dict[str, int] = {ch: 0 for ch in ALPHABET}
+    counts: dict[str, int] = dict.fromkeys(ALPHABET, 0)
     total = 0
     for ch in text.upper():
         if ch in counts:
             counts[ch] += 1
             total += 1
     if total == 0:
-        return {ch: 0.0 for ch in ALPHABET}
+        return dict.fromkeys(ALPHABET, 0.0)
     return {ch: round(counts[ch] / total * 100, 3) for ch in ALPHABET}
 
 

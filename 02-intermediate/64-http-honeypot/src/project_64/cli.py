@@ -8,8 +8,6 @@ from pathlib import Path
 
 import click
 
-from .core import HTTPHoneypotLogger
-
 
 @click.group()
 def cli() -> None:
@@ -23,11 +21,13 @@ def cli() -> None:
 def serve_cmd(host: str, port: int, log_file: str) -> None:
     """Start the HTTP honeypot server."""
     try:
-        from flask import Flask
-        from .app import app, _honeypot_logger
         import logging
-        from .core import HTTPHoneypotLogger
         from pathlib import Path as P
+
+        from flask import Flask
+
+        from .app import _honeypot_logger, app
+        from .core import HTTPHoneypotLogger
         _honeypot_logger.log_path = P(log_file)
     except ImportError as exc:
         click.echo(f"[error] Install flask: pip install flask — {exc}", err=True)

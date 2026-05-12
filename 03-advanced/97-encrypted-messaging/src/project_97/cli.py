@@ -20,7 +20,7 @@ def demo_cmd(messages: int) -> None:
     """Run a Double Ratchet messaging demo between Alice and Bob."""
     alice, bob = create_session_pair()
     click.echo("=== Double Ratchet Demo ===")
-    click.echo(f"Session established with fresh shared secret.\n")
+    click.echo("Session established with fresh shared secret.\n")
 
     for i in range(messages):
         plaintext = f"Message {i + 1} from Alice to Bob"

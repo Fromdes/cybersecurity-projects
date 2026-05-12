@@ -7,7 +7,7 @@ import shutil
 import sqlite3
 import tempfile
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -241,12 +241,12 @@ def _delete_firefox_entries(profile_path: Path, compiled: list[re.Pattern[str]])
 
 def _chrome_time_to_dt(chrome_ts: int) -> datetime:
     if not chrome_ts:
-        return datetime(1970, 1, 1, tzinfo=timezone.utc)
+        return datetime(1970, 1, 1, tzinfo=UTC)
     unix_us = chrome_ts - CHROME_EPOCH_OFFSET
-    return datetime.fromtimestamp(unix_us / 1_000_000, tz=timezone.utc)
+    return datetime.fromtimestamp(unix_us / 1_000_000, tz=UTC)
 
 
 def _firefox_time_to_dt(ff_ts: int) -> datetime:
     if not ff_ts:
-        return datetime(1970, 1, 1, tzinfo=timezone.utc)
-    return datetime.fromtimestamp(ff_ts / FIREFOX_EPOCH_DIVISOR, tz=timezone.utc)
+        return datetime(1970, 1, 1, tzinfo=UTC)
+    return datetime.fromtimestamp(ff_ts / FIREFOX_EPOCH_DIVISOR, tz=UTC)

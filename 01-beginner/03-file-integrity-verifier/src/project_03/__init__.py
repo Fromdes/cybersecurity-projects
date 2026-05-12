@@ -2,16 +2,16 @@
 
 from project_03.core import (
     IntegrityReport,
-    create_baseline,
     check_integrity,
+    create_baseline,
     load_baseline,
     save_baseline,
 )
 
 __all__ = [
     "IntegrityReport",
-    "create_baseline",
     "check_integrity",
+    "create_baseline",
     "load_baseline",
     "save_baseline",
 ]

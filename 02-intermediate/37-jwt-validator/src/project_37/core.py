@@ -94,7 +94,7 @@ def decode_header_unsafe(token: str) -> dict[str, Any]:
     """Decode JWT header without any verification (for inspection only)."""
     try:
         parts = token.split(".")
-        if len(parts) != 3:  # noqa: PLR2004
+        if len(parts) != 3:
             raise ValueError("JWT must have exactly three parts")
         raw: dict[str, Any] = json.loads(_b64_decode_unpadded(parts[0]))
         return raw
@@ -106,7 +106,7 @@ def decode_payload_unsafe(token: str) -> dict[str, Any]:
     """Decode JWT payload without signature verification (inspection only)."""
     try:
         parts = token.split(".")
-        if len(parts) != 3:  # noqa: PLR2004
+        if len(parts) != 3:
             raise ValueError("JWT must have exactly three parts")
         raw: dict[str, Any] = json.loads(_b64_decode_unpadded(parts[1]))
         return raw

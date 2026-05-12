@@ -12,7 +12,6 @@ import click
 from project_93.core import (
     AccessRequest,
     AuditLog,
-    ZeroTrustPolicy,
     load_policy_file,
 )
 

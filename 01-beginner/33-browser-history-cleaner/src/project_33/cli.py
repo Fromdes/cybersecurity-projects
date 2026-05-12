@@ -90,7 +90,7 @@ def main() -> None:
 
             except FileNotFoundError as exc:
                 print(f"  Warning: {exc}", file=sys.stderr)
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 print(f"  Error ({browser}/{profile_path}): {exc}", file=sys.stderr)
 
     if args.command == "scan":

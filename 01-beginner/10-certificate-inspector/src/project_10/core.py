@@ -5,15 +5,15 @@ from __future__ import annotations
 import socket
 import ssl
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
 from cryptography import x509
 from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from cryptography.hazmat.primitives.asymmetric.dsa import DSAPublicKey
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.hazmat.primitives.asymmetric.ed448 import Ed448PublicKey
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from cryptography.x509.oid import NameOID
 
 # Thresholds for expiry warnings
@@ -96,7 +96,7 @@ def load_from_host(host: str, port: int = 443, *, timeout: int = 10) -> x509.Cer
         with socket.create_connection((host, port), timeout=timeout) as sock:
             with context.wrap_socket(sock, server_hostname=host) as tls_sock:
                 der = tls_sock.getpeercert(binary_form=True)
-    except (OSError, socket.timeout) as exc:
+    except (TimeoutError, OSError) as exc:
         raise ConnectionError(f"Cannot connect to {host}:{port}: {exc}") from exc
     if not der:
         raise ValueError(f"No certificate received from {host}:{port}")
@@ -112,7 +112,7 @@ def inspect_certificate(cert: x509.Certificate) -> CertificateReport:
     Returns:
         Structured inspection report with warnings for any detected issues.
     """
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     not_after = cert.not_valid_after_utc
     days_left = (not_after - now).days
     expiry_status = _classify_expiry(days_left)

@@ -8,7 +8,6 @@ import mimetypes
 import os
 import re
 import secrets
-import shutil
 import stat
 from dataclasses import dataclass, field
 from pathlib import Path

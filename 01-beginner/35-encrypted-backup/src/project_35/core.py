@@ -1,7 +1,6 @@
 """Encrypted backup: compress directory → AES-256-GCM → .encbak file."""
 from __future__ import annotations
 
-import gzip
 import hashlib
 import io
 import json
@@ -9,7 +8,7 @@ import logging
 import secrets
 import tarfile
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from argon2.low_level import Type, hash_secret_raw
@@ -115,7 +114,7 @@ def create_backup(source: Path, output_path: Path, password: str) -> BackupManif
 
     manifest = BackupManifest(
         source_path=str(source),
-        created_at=datetime.now(tz=timezone.utc).isoformat(),
+        created_at=datetime.now(tz=UTC).isoformat(),
         file_count=file_count,
         uncompressed_size=uncompressed_size,
         compressed_size=compressed_size,

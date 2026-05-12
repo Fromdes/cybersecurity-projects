@@ -11,7 +11,6 @@ from project_89.core import (
     parse_rbac_dict,
 )
 
-
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 
 def _make_role(rules: list[dict]) -> RBACResource:

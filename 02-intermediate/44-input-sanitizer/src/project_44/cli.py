@@ -12,7 +12,6 @@ from project_44.core import (
     sanitize_filename,
     sanitize_text,
     validate_email,
-    validate_integer,
 )
 
 

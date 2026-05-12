@@ -8,7 +8,6 @@ import pytest
 
 from project_43.core import (
     FixedWindowLimiter,
-    LimitResult,
     SlidingWindowLimiter,
     TokenBucketLimiter,
 )

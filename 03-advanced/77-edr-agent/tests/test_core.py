@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from unittest.mock import MagicMock, patch
-
-import pytest
+from unittest.mock import patch
 
 from project_77.core import (
     EDRAgent,
@@ -125,7 +122,7 @@ class TestFinding:
     def test_to_dict(self) -> None:
         f = Finding(
             finding_id="abc123",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             threat_level=ThreatLevel.HIGH,
             category="test",
             description="test finding",

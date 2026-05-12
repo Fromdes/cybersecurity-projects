@@ -8,7 +8,7 @@ from pathlib import Path
 
 import click
 
-from project_82.core import IOCExtractor, IOC_TYPES
+from project_82.core import IOC_TYPES, IOCExtractor
 
 logging.basicConfig(
     level=logging.INFO,

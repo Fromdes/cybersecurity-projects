@@ -23,7 +23,7 @@ def analyse(email_file: str) -> None:
 
     result = analyse_email(raw)
 
-    click.echo(f"\nPhishing Analysis")
+    click.echo("\nPhishing Analysis")
     click.echo(f"  Subject : {result.subject[:60]}")
     click.echo(f"  From    : {result.sender}")
     click.echo(f"  Score   : {result.score}/100")

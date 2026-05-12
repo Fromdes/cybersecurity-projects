@@ -7,13 +7,13 @@ import time
 import pytest
 
 from project_47.core import (
+    FORM_FIELD_NAME,
+    HEADER_NAME,
     CSRFService,
     TokenExpiredError,
     TokenInvalidError,
     TokenNotFoundError,
     extract_token,
-    HEADER_NAME,
-    FORM_FIELD_NAME,
 )
 
 SECRET = b"test-secret-key-32-bytes-padded!!"

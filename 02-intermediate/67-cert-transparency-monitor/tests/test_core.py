@@ -15,12 +15,11 @@ from project_67.core import (
     parse_crtsh_response,
 )
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
-_NOW = datetime.datetime.now(tz=datetime.timezone.utc)
+_NOW = datetime.datetime.now(tz=datetime.UTC)
 _FUTURE = _NOW + datetime.timedelta(days=90)
 _PAST = _NOW - datetime.timedelta(days=1)
 

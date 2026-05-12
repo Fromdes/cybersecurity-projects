@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError, VerificationError, InvalidHashError
+from argon2.exceptions import InvalidHashError, VerificationError, VerifyMismatchError
 
 # Argon2id OWASP-recommended parameters (2023)
 ARGON2_TIME_COST: int = 2

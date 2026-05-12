@@ -61,7 +61,8 @@ def cmd_auth_url(
 ) -> None:
     """Build an OAuth2 authorization URL with PKCE parameters."""
     if verifier:
-        import base64, hashlib
+        import base64
+        import hashlib
         digest = hashlib.sha256(verifier.encode()).digest()
         challenge = base64.urlsafe_b64encode(digest).rstrip(b"=").decode()
         from project_38.core import PKCEChallenge

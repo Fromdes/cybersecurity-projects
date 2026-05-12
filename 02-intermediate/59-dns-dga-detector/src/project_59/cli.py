@@ -7,7 +7,7 @@ from pathlib import Path
 
 import click
 
-from .core import analyse_domain_list, classify_domain
+from .core import analyse_domain_list
 
 
 @click.command()

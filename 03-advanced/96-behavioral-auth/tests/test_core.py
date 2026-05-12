@@ -6,7 +6,6 @@ import pytest
 
 from project_96.core import (
     BehavioralProfile,
-    FeatureStat,
     KeyEvent,
     KeystrokeSample,
     build_profile,

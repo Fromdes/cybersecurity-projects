@@ -277,7 +277,7 @@ class WebAuthnVerifier:
         """
         try:
             data: dict[str, Any] = json.loads(client_data_json.decode("utf-8"))
-        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        except (json.JSONDecodeError, UnicodeDecodeError):
             return VerificationResult(status=VerificationStatus.INVALID_FORMAT)
 
         client_type = data.get("type", "")

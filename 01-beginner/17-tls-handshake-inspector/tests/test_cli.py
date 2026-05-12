@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -10,8 +10,8 @@ import pytest
 from project_17.cli import _print_human, _result_to_dict, main
 from project_17.core import CertInfo, TLSResult
 
-_PAST = datetime(2000, 1, 1, tzinfo=timezone.utc)
-_FUTURE = datetime(2099, 12, 31, tzinfo=timezone.utc)
+_PAST = datetime(2000, 1, 1, tzinfo=UTC)
+_FUTURE = datetime(2099, 12, 31, tzinfo=UTC)
 
 
 def _make_result(expired: bool = False) -> TLSResult:

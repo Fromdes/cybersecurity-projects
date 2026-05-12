@@ -6,7 +6,6 @@ import json
 import os
 from dataclasses import asdict, dataclass
 from enum import Enum
-from pathlib import Path
 
 HASH_ALGORITHM: str = "sha256"
 CHUNK_SIZE: int = 65_536  # 64 KiB read buffer

@@ -6,7 +6,6 @@ Hijacking via DOM injection), T1565.003 (Stored XSS data manipulation).
 
 from __future__ import annotations
 
-import html
 import json
 import logging
 import re
@@ -122,7 +121,7 @@ def encode_js_string(value: str) -> str:
     # Encode any remaining non-ASCII or control characters
     def _escape_char(c: str) -> str:
         n = ord(c)
-        if n > 127 or n < 32:  # noqa: PLR2004
+        if n > 127 or n < 32:
             return f"\\u{n:04X}"
         return c
 

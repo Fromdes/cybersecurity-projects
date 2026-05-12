@@ -5,11 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from project_91.core import (
-    IAMFinding,
-    PolicyAnalysis,
     analyze_policy_dict,
     analyze_policy_file,
     analyze_statement,

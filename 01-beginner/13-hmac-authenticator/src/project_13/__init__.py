@@ -3,9 +3,9 @@
 from project_13.core import (
     HMACResult,
     compute_hmac,
-    verify_hmac,
     sign_file,
     verify_file,
+    verify_hmac,
 )
 
-__all__ = ["HMACResult", "compute_hmac", "verify_hmac", "sign_file", "verify_file"]
+__all__ = ["HMACResult", "compute_hmac", "sign_file", "verify_file", "verify_hmac"]

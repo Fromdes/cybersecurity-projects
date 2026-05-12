@@ -3,14 +3,11 @@
 from __future__ import annotations
 
 import csv
-import hashlib
-import ipaddress
 import json
 import logging
 import re
 from dataclasses import dataclass, field
 from enum import Enum
-from io import StringIO
 from pathlib import Path
 from typing import Any, Final
 
@@ -108,7 +105,7 @@ class IOCStore:
     # ------------------------------------------------------------------
 
     @classmethod
-    def from_csv(cls, path: Path, *, source: str = "") -> "IOCStore":
+    def from_csv(cls, path: Path, *, source: str = "") -> IOCStore:
         """Load IOCs from a CSV with columns: value, type[, confidence, tags, description]."""
         store = cls()
         with path.open(encoding="utf-8") as fh:
@@ -130,7 +127,7 @@ class IOCStore:
         return store
 
     @classmethod
-    def from_json(cls, path: Path, *, source: str = "") -> "IOCStore":
+    def from_json(cls, path: Path, *, source: str = "") -> IOCStore:
         """Load IOCs from a JSON list of {value, type, ...} objects."""
         store = cls()
         data: list[dict[str, Any]] = json.loads(path.read_text(encoding="utf-8"))

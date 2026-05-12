@@ -8,8 +8,6 @@ import json
 import click
 
 from project_42.core import (
-    FLAG_UP,
-    FLAG_UV,
     ChallengeStore,
     CredentialStore,
     StoredCredential,

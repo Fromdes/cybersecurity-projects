@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import patch
 
@@ -10,13 +11,12 @@ from click.testing import CliRunner
 
 from project_77.cli import cli
 from project_77.core import Finding, ThreatLevel
-from datetime import datetime, timezone
 
 
 def make_finding(level: ThreatLevel = ThreatLevel.HIGH) -> Finding:
     return Finding(
         finding_id="abc",
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         threat_level=level,
         category="test",
         description="test finding",
@@ -45,9 +45,9 @@ class TestReportCommand:
         findings_file = tmp_path / "findings.jsonl"
         records = [
             {"finding_id": "1", "threat_level": "HIGH", "category": "c", "description": "d",
-             "timestamp": datetime.now(timezone.utc).isoformat(), "mitre_technique": "", "details": {}},
+             "timestamp": datetime.now(UTC).isoformat(), "mitre_technique": "", "details": {}},
             {"finding_id": "2", "threat_level": "MEDIUM", "category": "c", "description": "d",
-             "timestamp": datetime.now(timezone.utc).isoformat(), "mitre_technique": "", "details": {}},
+             "timestamp": datetime.now(UTC).isoformat(), "mitre_technique": "", "details": {}},
         ]
         findings_file.write_text("\n".join(json.dumps(r) for r in records) + "\n")
         runner = CliRunner()

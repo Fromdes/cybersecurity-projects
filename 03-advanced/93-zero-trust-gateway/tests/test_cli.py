@@ -10,7 +10,6 @@ from click.testing import CliRunner
 
 from project_93.cli import cli
 
-
 ALLOW_POLICY = {
     "default_action": "DENY",
     "rules": [

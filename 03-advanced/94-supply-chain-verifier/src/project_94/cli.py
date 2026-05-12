@@ -67,7 +67,7 @@ def verify_cmd(
         icon = click.style("✓", fg="green") if check.passed else click.style("✗", fg="red")
         click.echo(f"  {icon} {check.name}: {check.detail}")
     if result.provenance:
-        click.echo(f"\nProvenance:")
+        click.echo("\nProvenance:")
         click.echo(f"  Builder:    {result.provenance.builder_id}")
         click.echo(f"  SLSA level: {result.provenance.slsa_level}")
         click.echo(f"  Type:       {result.provenance.predicate_type}")
@@ -93,7 +93,7 @@ def check_sums_cmd(checksums_file: Path, base_dir: Path | None, exit_code: bool)
     for entry in entries:
         artifact_path = base / entry.filename
         if not artifact_path.exists():
-            click.echo(click.style(f"  MISSING", fg="red") + f"  {entry.filename}")
+            click.echo(click.style("  MISSING", fg="red") + f"  {entry.filename}")
             all_passed = False
             continue
         ok = verify_hash(artifact_path, entry.digest, entry.algorithm)

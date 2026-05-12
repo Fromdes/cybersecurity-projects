@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import UTC
 from pathlib import Path
 
 from click.testing import CliRunner
@@ -50,17 +51,17 @@ class TestRulesCommand:
 class TestSummaryCommand:
     def test_summary(self, tmp_path: Path) -> None:
         import json
-        from datetime import datetime, timezone
+        from datetime import datetime
 
         alerts_file = tmp_path / "alerts.jsonl"
         records = [
             {"alert_id": "1", "rule_name": "R1", "severity": "HIGH", "message": "m",
-             "triggered_at": datetime.now(timezone.utc).isoformat(),
-             "event": {"event_id": "e1", "timestamp": datetime.now(timezone.utc).isoformat(),
+             "triggered_at": datetime.now(UTC).isoformat(),
+             "event": {"event_id": "e1", "timestamp": datetime.now(UTC).isoformat(),
                        "source": "test", "message": "msg"}},
             {"alert_id": "2", "rule_name": "R2", "severity": "MEDIUM", "message": "m2",
-             "triggered_at": datetime.now(timezone.utc).isoformat(),
-             "event": {"event_id": "e2", "timestamp": datetime.now(timezone.utc).isoformat(),
+             "triggered_at": datetime.now(UTC).isoformat(),
+             "event": {"event_id": "e2", "timestamp": datetime.now(UTC).isoformat(),
                        "source": "test", "message": "msg2"}},
         ]
         alerts_file.write_text("\n".join(json.dumps(r) for r in records) + "\n")

@@ -2,13 +2,10 @@
 
 from __future__ import annotations
 
-import time
-
 import pytest
 from fastapi.testclient import TestClient
 
-from project_49.app import app, _key_store, _api_secret
-from project_49.core import sign_request
+from project_49.app import _key_store, app
 
 client = TestClient(app, raise_server_exceptions=True)
 

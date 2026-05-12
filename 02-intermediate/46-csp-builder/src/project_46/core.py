@@ -100,7 +100,7 @@ class CSPViolationReport:
     script_sample: str = ""
 
     @classmethod
-    def from_json(cls, raw: str | bytes | dict[str, Any]) -> "CSPViolationReport":
+    def from_json(cls, raw: str | bytes | dict[str, Any]) -> CSPViolationReport:
         """Parse a CSP violation report from JSON."""
         if isinstance(raw, (str, bytes)):
             data: dict[str, Any] = json.loads(raw)
@@ -141,12 +141,12 @@ class CSPPolicy:
     # Mutation helpers
     # ------------------------------------------------------------------
 
-    def set(self, directive: str, *values: str) -> "CSPPolicy":
+    def set(self, directive: str, *values: str) -> CSPPolicy:
         """Replace all values for a directive."""
         self.directives[directive] = list(values)
         return self
 
-    def add(self, directive: str, *values: str) -> "CSPPolicy":
+    def add(self, directive: str, *values: str) -> CSPPolicy:
         """Append values to a directive (creates if absent)."""
         existing = self.directives.setdefault(directive, [])
         for v in values:
@@ -154,7 +154,7 @@ class CSPPolicy:
                 existing.append(v)
         return self
 
-    def remove(self, directive: str) -> "CSPPolicy":
+    def remove(self, directive: str) -> CSPPolicy:
         """Remove a directive entirely."""
         self.directives.pop(directive, None)
         return self
@@ -244,7 +244,7 @@ class CSPBuilder:
     # Preset helpers
     # ------------------------------------------------------------------
 
-    def strict(self) -> "CSPBuilder":
+    def strict(self) -> CSPBuilder:
         """Apply a strict modern baseline (nonce-ready, no unsafe-*)."""
         self._policy.set(FetchDirective.DEFAULT_SRC.value, NONE_VALUE)
         self._policy.set(FetchDirective.SCRIPT_SRC.value, SELF_VALUE, STRICT_DYNAMIC)
@@ -258,33 +258,33 @@ class CSPBuilder:
         self._policy.set(OtherDirective.UPGRADE_INSECURE_REQUESTS.value)
         return self
 
-    def report_only(self, endpoint: str) -> "CSPBuilder":
+    def report_only(self, endpoint: str) -> CSPBuilder:
         """Add report-uri (use for CSP-Report-Only mode)."""
         self._policy.set(ReportingDirective.REPORT_URI.value, endpoint)
         return self
 
-    def report_to(self, group: str) -> "CSPBuilder":
+    def report_to(self, group: str) -> CSPBuilder:
         """Add report-to group name (Reporting API v1)."""
         self._policy.set(ReportingDirective.REPORT_TO.value, group)
         return self
 
-    def allow_nonce(self, directive: str, nonce: str) -> "CSPBuilder":
+    def allow_nonce(self, directive: str, nonce: str) -> CSPBuilder:
         """Add a nonce source to a directive."""
         nonce_val = f"'nonce-{nonce}'"
         self._policy.add(directive, nonce_val)
         return self
 
-    def allow_hash(self, directive: str, algorithm: str, digest: str) -> "CSPBuilder":
+    def allow_hash(self, directive: str, algorithm: str, digest: str) -> CSPBuilder:
         """Add a hash source to a directive."""
         self._policy.add(directive, f"'{algorithm}-{digest}'")
         return self
 
-    def add(self, directive: str, *values: str) -> "CSPBuilder":
+    def add(self, directive: str, *values: str) -> CSPBuilder:
         """Add arbitrary values to a directive."""
         self._policy.add(directive, *values)
         return self
 
-    def set(self, directive: str, *values: str) -> "CSPBuilder":
+    def set(self, directive: str, *values: str) -> CSPBuilder:
         """Replace a directive."""
         self._policy.set(directive, *values)
         return self

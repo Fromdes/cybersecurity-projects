@@ -82,7 +82,7 @@ def check_cmd(manifest: Path, output: Path | None, exit_code: bool, offline: boo
                 vuln.severity, "white"
             )
             click.echo(
-                f"  " + click.style(f"[{vuln.severity}]", fg=color)
+                "  " + click.style(f"[{vuln.severity}]", fg=color)
                 + f" {vuln.vuln_id} — {vuln.summary[:80]}"
             )
             if vuln.fixed_version:

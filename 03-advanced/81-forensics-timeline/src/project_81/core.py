@@ -5,13 +5,12 @@ from __future__ import annotations
 import csv
 import json
 import logging
-import os
 import re
-import stat
+from collections.abc import Iterator
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +39,7 @@ class TimelineEvent:
         }
 
     @staticmethod
-    def from_dict(d: dict[str, Any]) -> "TimelineEvent":
+    def from_dict(d: dict[str, Any]) -> TimelineEvent:
         """Deserialize from dict."""
         return TimelineEvent(
             timestamp=datetime.fromisoformat(d["timestamp"]),
@@ -76,7 +75,7 @@ def _file_events(path: Path) -> Iterator[TimelineEvent]:
             (s.st_ctime, "FILE_CHANGED", "File metadata changed"),
         ):
             yield TimelineEvent(
-                timestamp=datetime.fromtimestamp(ts_attr, tz=timezone.utc),
+                timestamp=datetime.fromtimestamp(ts_attr, tz=UTC),
                 source="filesystem",
                 event_type=event_type,
                 description=f"{description}: {path.name}",
@@ -101,7 +100,7 @@ _MONTH_MAP = {
 def collect_syslog_events(log_path: Path, year: int | None = None) -> Iterator[TimelineEvent]:
     """Parse syslog-format log file into timeline events."""
     if year is None:
-        year = datetime.now(timezone.utc).year
+        year = datetime.now(UTC).year
     with log_path.open(errors="replace") as fh:
         for line in fh:
             line = line.strip()
@@ -114,7 +113,7 @@ def collect_syslog_events(log_path: Path, year: int | None = None) -> Iterator[T
                 month = _MONTH_MAP.get(m.group("month"), 1)
                 day = int(m.group("day"))
                 h, mi, s = map(int, m.group("time").split(":"))
-                ts = datetime(year, month, day, h, mi, s, tzinfo=timezone.utc)
+                ts = datetime(year, month, day, h, mi, s, tzinfo=UTC)
             except (ValueError, KeyError):
                 continue
             yield TimelineEvent(
@@ -145,7 +144,7 @@ def collect_generic_log_events(log_path: Path) -> Iterator[TimelineEvent]:
                     ts_str = ts_str[:-1] + "+00:00"
                 ts = datetime.fromisoformat(ts_str)
                 if ts.tzinfo is None:
-                    ts = ts.replace(tzinfo=timezone.utc)
+                    ts = ts.replace(tzinfo=UTC)
             except ValueError:
                 continue
             yield TimelineEvent(
