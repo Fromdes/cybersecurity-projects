@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-90-terraform-scanner"
+version = "0.1.0"
+description = "Terraform Security Scanner — static analysis for Terraform HCL configurations"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.scripts]
+terraform-scanner = "project_90.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_90"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]

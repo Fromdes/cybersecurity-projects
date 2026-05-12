@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-94-supply-chain-verifier"
+version = "0.1.0"
+description = "Supply Chain Verifier — SLSA provenance and artifact integrity verification"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.scripts]
+supply-chain-verifier = "project_94.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_94"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104","S324"]

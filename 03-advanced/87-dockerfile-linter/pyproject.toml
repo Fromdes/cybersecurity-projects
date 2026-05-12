@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-87-dockerfile-linter"
+version = "0.1.0"
+description = "Dockerfile Linter & CIS Docker Benchmark checker"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.scripts]
+dockerfile-linter = "project_87.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_87"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]
