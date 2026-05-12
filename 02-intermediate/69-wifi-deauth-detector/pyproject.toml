@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-69-wifi-deauth-detector"
+version = "0.1.0"
+description = "WiFi Deauthentication Attack Detector"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.scripts]
+wifi-deauth-detector = "project_69.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_69"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]
