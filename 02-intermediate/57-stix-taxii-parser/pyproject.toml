@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-57-stix-taxii-parser"
+version = "0.1.0"
+description = "STIX/TAXII Feed Parser"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.optional-dependencies]
+taxii = ["requests>=2.31"]
+
+[project.scripts]
+stix-taxii-parser = "project_57.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_57"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101"]

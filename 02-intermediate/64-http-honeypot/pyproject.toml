@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-64-http-honeypot"
+version = "0.1.0"
+description = "HTTP Honeypot Logger"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1", "flask>=3.0"]
+
+[project.scripts]
+http-honeypot = "project_64.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_64"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-60-linux-process-logger"
+version = "0.1.0"
+description = "Linux Process Tree Logger"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1", "psutil>=5.9"]
+
+[project.scripts]
+process-logger = "project_60.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_60"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101"]
