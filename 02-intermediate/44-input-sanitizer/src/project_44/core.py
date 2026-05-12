@@ -10,7 +10,7 @@ import logging
 import re
 import unicodedata
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # Threat categories
 # ---------------------------------------------------------------------------
 
-class ThreatType(str, Enum):
+class ThreatType(StrEnum):
     """Category of detected threat."""
 
     XSS = "xss"

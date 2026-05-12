@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import os
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 from argon2 import PasswordHasher
 from argon2.exceptions import InvalidHashError, VerificationError, VerifyMismatchError
@@ -22,7 +22,7 @@ PBKDF2_KEY_LEN: int = 32          # 256-bit derived key
 PBKDF2_SALT_LEN: int = 16         # 128-bit salt
 
 
-class HashAlgorithm(str, Enum):
+class HashAlgorithm(StrEnum):
     """Supported password hashing algorithms."""
 
     ARGON2ID = "argon2id"

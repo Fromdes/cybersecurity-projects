@@ -13,7 +13,7 @@ _SECRET = "JBSWY3DPEHPK3PXP"
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["totp-qr"] + args
+    sys.argv = ["totp-qr", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()

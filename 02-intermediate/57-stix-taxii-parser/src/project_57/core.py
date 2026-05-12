@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 # STIX object types we care about
 # ---------------------------------------------------------------------------
 
-class STIXType(str, Enum):
+class STIXType(StrEnum):
     INDICATOR = "indicator"
     MALWARE = "malware"
     THREAT_ACTOR = "threat-actor"

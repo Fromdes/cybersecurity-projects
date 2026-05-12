@@ -11,7 +11,7 @@ from project_01.cli import main
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[str, str]:
     """Run CLI with *args* and return (stdout, stderr)."""
-    sys.argv = ["cipher-toolkit"] + args
+    sys.argv = ["cipher-toolkit", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     assert exc.value.code == 0

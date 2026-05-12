@@ -132,7 +132,7 @@ Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
 
 class TestParseIptablesOutput:
     def test_rule_count(self) -> None:
-        rules, policies = parse_iptables_output(_SAMPLE_OUTPUT)
+        rules, _policies = parse_iptables_output(_SAMPLE_OUTPUT)
         assert len(rules) == 3
 
     def test_default_policies(self) -> None:

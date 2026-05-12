@@ -12,7 +12,7 @@ import logging
 import secrets
 import time
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ MAX_SESSIONS_PER_USER: int = 5
 ROTATION_GRACE_SECONDS: int = 5          # old token valid this long after rotation
 
 
-class SessionStatus(str, Enum):
+class SessionStatus(StrEnum):
     """Lifecycle state of a session."""
 
     ACTIVE = "active"

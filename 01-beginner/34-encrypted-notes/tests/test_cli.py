@@ -11,7 +11,7 @@ from project_34.cli import main
 
 class TestCLI:
     def _run(self, args: list[str], store_path: Path, password: str = "secret") -> None:
-        with patch("sys.argv", ["enc-notes", "--store", str(store_path)] + args):
+        with patch("sys.argv", ["enc-notes", "--store", str(store_path), *args]):
             with patch("getpass.getpass", return_value=password):
                 main()
 

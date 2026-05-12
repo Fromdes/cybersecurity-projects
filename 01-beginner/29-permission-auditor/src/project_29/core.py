@@ -5,7 +5,7 @@ import logging
 import os
 import stat
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 log = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ STICKY_MASK: int = 0o1000
 GROUP_WRITE_MASK: int = 0o020
 
 
-class IssueType(str, Enum):
+class IssueType(StrEnum):
     """Category of permission issue detected."""
 
     WORLD_WRITABLE = "world_writable"

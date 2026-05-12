@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Final
 
 # ---------------------------------------------------------------------------
@@ -18,7 +18,7 @@ _SID_COUNTER: int = 1000000
 _CONTENT_SPECIAL_RE: Final[re.Pattern[str]] = re.compile(r'[|;\\"]')
 
 
-class Direction(str, Enum):
+class Direction(StrEnum):
     UNIDIRECTIONAL = "->"
     BIDIRECTIONAL = "<>"
 

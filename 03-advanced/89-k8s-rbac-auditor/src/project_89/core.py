@@ -130,8 +130,8 @@ def audit_role(resource: RBACResource) -> list[RBACFinding]:
     seen_rule_ids: set[str] = set()
 
     for rule in resource.rules:
-        rule_resources = set(resource_name.lower() for resource_name in (rule.get("resources") or []))
-        rule_verbs = set(v.lower() for v in (rule.get("verbs") or []))
+        rule_resources = {resource_name.lower() for resource_name in (rule.get("resources") or [])}
+        rule_verbs = {v.lower() for v in (rule.get("verbs") or [])}
 
         for req_resources, req_verbs, rule_id, severity, title in DANGEROUS_VERB_COMBOS:
             if rule_id in seen_rule_ids:

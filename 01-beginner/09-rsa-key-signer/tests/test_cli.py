@@ -15,7 +15,7 @@ _PASSWORD = "cli-test-password"
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["rsa-sign"] + args
+    sys.argv = ["rsa-sign", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -41,7 +41,7 @@ class TestGenerateCLI:
         with patch(
             "project_09.cli.getpass.getpass", side_effect=[_PASSWORD, _PASSWORD]
         ):
-            code, out, _ = _run(
+            code, _out, _ = _run(
                 ["generate-key", "--private", str(priv), "--public", str(pub)], capsys
             )
         assert code == 0
@@ -69,7 +69,7 @@ class TestSignCLI:
         f.write_bytes(b"document")
         sig = tmp_path / "doc.txt.sig"
         with patch("project_09.cli.getpass.getpass", return_value=_PASSWORD):
-            code, out, _ = _run(
+            code, _out, _ = _run(
                 ["sign", str(f), "--key", str(keys[0]), "--output", str(sig)],
                 capsys,
             )

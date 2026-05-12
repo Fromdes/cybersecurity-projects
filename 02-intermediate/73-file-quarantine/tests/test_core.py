@@ -82,7 +82,7 @@ class TestQuarantineStore:
         assert "not found" in result.error.lower()
 
     def test_quarantine_dir_permissions(self, tmp_path: Path) -> None:
-        store = QuarantineStore(tmp_path / "q")
+        QuarantineStore(tmp_path / "q")
         mode = os.stat(tmp_path / "q").st_mode & 0o777
         assert mode == 0o700
 

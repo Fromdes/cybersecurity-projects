@@ -10,7 +10,7 @@ from project_05.cli import main
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["password-gen"] + args
+    sys.argv = ["password-gen", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -42,7 +42,7 @@ class TestCLI:
         assert "bits" in out
 
     def test_invalid_length_exits_1(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(["--length", "3"], capsys)
+        code, _, _err = _run(["--length", "3"], capsys)
         assert code == 1
 
     def test_no_special_flag(self, capsys: pytest.CaptureFixture[str]) -> None:

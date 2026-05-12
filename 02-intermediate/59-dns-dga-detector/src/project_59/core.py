@@ -98,10 +98,7 @@ def classify_domain(domain: str) -> DGAVerdict:
     domain = domain.lower().strip().rstrip(".")
     # Extract the most-significant label (skip TLD)
     parts = domain.split(".")
-    if len(parts) >= 2:
-        label = parts[-2]
-    else:
-        label = parts[0]
+    label = parts[-2] if len(parts) >= 2 else parts[0]
 
     length = len(label)
     ent = shannon_entropy(label)

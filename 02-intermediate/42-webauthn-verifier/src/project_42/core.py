@@ -16,7 +16,7 @@ import logging
 import secrets
 import struct
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ FLAG_AT: int = 0x40   # Attested Credential Data present
 FLAG_ED: int = 0x80   # Extension Data present
 
 
-class VerificationStatus(str, Enum):
+class VerificationStatus(StrEnum):
     """Outcome of a WebAuthn ceremony verification."""
 
     OK = "ok"

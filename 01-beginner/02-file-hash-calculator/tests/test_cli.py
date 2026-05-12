@@ -12,7 +12,7 @@ from project_02.cli import main
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["file-hash"] + args
+    sys.argv = ["file-hash", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -46,13 +46,13 @@ class TestHashCLI:
         assert "sha256" in out
 
     def test_hash_missing_file(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(["hash", "--file", "/nonexistent/path.txt"], capsys)
+        code, _, _err = _run(["hash", "--file", "/nonexistent/path.txt"], capsys)
         assert code == 1
 
     def test_all_requires_file(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        code, _, err = _run(["hash", "--text", "hi", "--all"], capsys)
+        code, _, _err = _run(["hash", "--text", "hi", "--all"], capsys)
         assert code == 1
 
 
@@ -74,5 +74,5 @@ class TestVerifyCLI:
         assert "MISMATCH" in out
 
     def test_verify_missing_file(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(["verify", "/no/such/file.txt", "aabb"], capsys)
+        code, _, _err = _run(["verify", "/no/such/file.txt", "aabb"], capsys)
         assert code == 1

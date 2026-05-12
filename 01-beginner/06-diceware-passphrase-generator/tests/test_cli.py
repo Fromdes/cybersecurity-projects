@@ -11,7 +11,7 @@ from project_06.cli import main
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["diceware"] + args
+    sys.argv = ["diceware", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -45,7 +45,7 @@ class TestDicewareCLI:
         assert " " in out.strip()
 
     def test_missing_wordlist_file(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(["--wordlist", "/no/such/file.txt"], capsys)
+        code, _, _err = _run(["--wordlist", "/no/such/file.txt"], capsys)
         assert code == 1
 
     def test_custom_wordlist(

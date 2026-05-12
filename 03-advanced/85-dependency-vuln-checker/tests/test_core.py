@@ -104,12 +104,12 @@ class TestDetectAndParse:
 class TestParseSeverity:
     def test_critical_from_db_specific(self) -> None:
         vuln = {"database_specific": {"severity": "CRITICAL"}, "severity": []}
-        label, score = _parse_severity(vuln)
+        label, _score = _parse_severity(vuln)
         assert label == "CRITICAL"
 
     def test_unknown_default(self) -> None:
         vuln = {}
-        label, score = _parse_severity(vuln)
+        label, _score = _parse_severity(vuln)
         assert label == "UNKNOWN"
 
 

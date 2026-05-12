@@ -110,8 +110,8 @@ class TestCrypto:
         assert bob.receive(wire) == "ping"
 
     def test_different_sessions_incompatible(self) -> None:
-        alice1, bob1 = create_session_pair()
-        alice2, bob2 = create_session_pair()
+        alice1, _bob1 = create_session_pair()
+        _alice2, bob2 = create_session_pair()
         wire = alice1.send("hello")
         with pytest.raises(Exception):
             bob2.receive(wire)

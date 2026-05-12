@@ -95,9 +95,8 @@ def _destination_matches(destination: str, patterns: frozenset[str]) -> bool:
         # CIDR match for IP destinations
         try:
             ipaddress.ip_address(destination)
-            if "/" in pat:
-                if _ip_in_cidrs(destination, frozenset({pat})):
-                    return True
+            if "/" in pat and _ip_in_cidrs(destination, frozenset({pat})):
+                return True
         except ValueError:
             pass
     return False

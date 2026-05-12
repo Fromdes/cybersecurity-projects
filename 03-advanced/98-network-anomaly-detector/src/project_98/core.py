@@ -59,9 +59,7 @@ def _is_private_ip(ip: str) -> bool:
         return True
     if octets[0] == 192 and octets[1] == 168:
         return True
-    if octets[0] == 127:
-        return True
-    return False
+    return octets[0] == 127
 
 
 # ── CSV/JSONL parsing ─────────────────────────────────────────────────────────
@@ -210,7 +208,7 @@ def _zscore_anomalies(
     mitre: str = "T1046",
 ) -> list[Anomaly]:
     anomalies: list[Anomaly] = []
-    for i, (flow, v) in enumerate(zip(flows, values)):
+    for i, (flow, v) in enumerate(zip(flows, values, strict=False)):
         z = stats.z_score(v)
         if z >= z_threshold and v > stats.mean:
             anomalies.append(Anomaly(

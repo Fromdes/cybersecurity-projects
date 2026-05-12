@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
 import socket
 import threading
@@ -147,10 +148,8 @@ def _handle_connection(
             timestamp=time.time(), src_ip=src_ip, src_port=src_port,
             event_type="disconnect", session_id=session_id,
         ))
-        try:
+        with contextlib.suppress(OSError):
             conn.close()
-        except OSError:
-            pass
 
 
 class SSHHoneypotServer:
@@ -188,10 +187,8 @@ class SSHHoneypotServer:
     def stop(self) -> None:
         self._running = False
         if self._server_socket:
-            try:
+            with contextlib.suppress(OSError):
                 self._server_socket.close()
-            except OSError:
-                pass
 
     def _accept_loop(self) -> None:
         assert self._server_socket is not None

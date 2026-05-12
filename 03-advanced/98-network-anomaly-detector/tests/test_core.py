@@ -89,13 +89,13 @@ class TestVolumeAnomalies:
         assert len(anomalies) == 0
 
     def test_giant_flow_detected(self) -> None:
-        flows = self._baseline() + [_flow(byt=500_000)]
+        flows = [*self._baseline(), _flow(byt=500000)]
         anomalies = detect_volume_anomalies(flows, z_threshold=3.0)
         assert len(anomalies) >= 1
         assert anomalies[-1].anomaly_type == "VOLUME_ANOMALY"
 
     def test_anomaly_severity_high(self) -> None:
-        flows = self._baseline() + [_flow(byt=1_000_000)]
+        flows = [*self._baseline(), _flow(byt=1000000)]
         anomalies = detect_volume_anomalies(flows, z_threshold=2.0)
         assert any(a.severity == "HIGH" for a in anomalies)
 

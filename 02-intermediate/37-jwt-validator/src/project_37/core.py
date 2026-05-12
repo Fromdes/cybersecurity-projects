@@ -12,7 +12,7 @@ import json
 import logging
 import time
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 import jwt  # PyJWT
@@ -27,7 +27,7 @@ DANGEROUS_ALGORITHMS: frozenset[str] = frozenset({"none", "HS256", "HS384", "HS5
 WEAK_ALGORITHMS: frozenset[str] = frozenset({"RS256", "RS384", "RS512", "ES256", "ES384", "ES512", "PS256", "PS384", "PS512"})
 
 
-class ValidationStatus(str, Enum):
+class ValidationStatus(StrEnum):
     """Outcome of a JWT validation run."""
 
     VALID = "VALID"

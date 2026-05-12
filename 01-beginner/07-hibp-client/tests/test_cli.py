@@ -14,7 +14,7 @@ _SUFFIX = _SHA1_OF_PASSWORD[5:]
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["hibp-check"] + args
+    sys.argv = ["hibp-check", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -40,7 +40,7 @@ class TestCLIPassword:
         import io
         monkeypatch.setattr("sys.stdin", io.StringIO("somepassword\n"))
         with patch("project_07.cli.check_password", return_value=0):
-            code, out, _ = _run(["password", "--stdin"], capsys)
+            code, _out, _ = _run(["password", "--stdin"], capsys)
         assert code == 0
 
 
@@ -52,11 +52,11 @@ class TestCLIHash:
         assert "PWNED" in out
 
     def test_invalid_hash(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(["hash", "notvalid"], capsys)
+        code, _, _err = _run(["hash", "notvalid"], capsys)
         assert code == 1
 
     def test_network_timeout(self, capsys: pytest.CaptureFixture[str]) -> None:
         import requests as req
         with patch("project_07.cli.check_password", side_effect=req.Timeout):
-            code, _, err = _run(["password", "test"], capsys)
+            code, _, _err = _run(["password", "test"], capsys)
         assert code == 2

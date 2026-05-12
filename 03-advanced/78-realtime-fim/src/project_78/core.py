@@ -9,7 +9,7 @@ import threading
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
@@ -21,7 +21,7 @@ HASH_ALGO = "sha256"
 BASELINE_VERSION = 1
 
 
-class EventType(str, Enum):
+class EventType(StrEnum):
     """File system event types."""
 
     CREATED = "CREATED"

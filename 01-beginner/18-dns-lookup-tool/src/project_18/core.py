@@ -4,7 +4,7 @@ from __future__ import annotations
 import ipaddress
 import logging
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 import dns.exception
@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 DEFAULT_TIMEOUT: float = 5.0
 
 
-class RecordType(str, Enum):
+class RecordType(StrEnum):
     """Supported DNS record types."""
 
     A = "A"

@@ -7,7 +7,7 @@ import json
 import logging
 import re
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Final
 
@@ -35,7 +35,7 @@ _EMAIL_RE: Final[re.Pattern[str]] = re.compile(
 _CVE_RE: Final[re.Pattern[str]] = re.compile(r"\bCVE-\d{4}-\d{4,}\b")
 
 
-class IOCType(str, Enum):
+class IOCType(StrEnum):
     IPV4 = "ipv4"
     DOMAIN = "domain"
     URL = "url"

@@ -11,12 +11,12 @@ import time
 from abc import ABC, abstractmethod
 from collections import deque
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 logger = logging.getLogger(__name__)
 
 
-class LimitResult(str, Enum):
+class LimitResult(StrEnum):
     """Outcome of a rate-limit check."""
 
     ALLOWED = "allowed"

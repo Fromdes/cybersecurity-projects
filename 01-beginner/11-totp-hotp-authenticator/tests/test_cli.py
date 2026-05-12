@@ -13,7 +13,7 @@ _SECRET = "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ"
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["otp"] + args
+    sys.argv = ["otp", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -44,7 +44,7 @@ class TestTOTPCLI:
         assert "VALID" in out
 
     def test_verify_invalid(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(
+        code, _, _err = _run(
             ["totp", "--secret", _SECRET, "--verify", "000000"], capsys
         )
         assert code == 1

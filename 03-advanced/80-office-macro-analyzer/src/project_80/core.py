@@ -155,7 +155,7 @@ class MacroAnalyzer:
         """Analyze an Office document for macro-based risks."""
         data = file_path.read_bytes()
         sha256 = hashlib.sha256(data).hexdigest()
-        ext = file_path.suffix.lower()
+        file_path.suffix.lower()
 
         if _is_ole2(data):
             file_format = "OLE2"
@@ -186,7 +186,7 @@ class MacroAnalyzer:
         all_indicators: list[RiskIndicator] = []
 
         if has_macros:
-            for _, _, vba_filename, vba_code in vba_parser.extract_macros():
+            for _, _, _vba_filename, vba_code in vba_parser.extract_macros():
                 vba_code_list.append(vba_code)
                 indicators = _scan_vba_text(vba_code)
                 all_indicators.extend(indicators)

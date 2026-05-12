@@ -85,10 +85,7 @@ def _check_image_config(config: dict[str, Any], image_name: str) -> list[ImageFi
     # Check entrypoint/cmd for dangerous patterns
     for key in ("Entrypoint", "Cmd"):
         val = cfg.get(key) or []
-        if isinstance(val, list):
-            joined = " ".join(str(v) for v in val)
-        else:
-            joined = str(val)
+        joined = " ".join(str(v) for v in val) if isinstance(val, list) else str(val)
         if re.search(r"\bsh\b|\bbash\b", joined) and re.search(r"-c\b", joined):
             findings.append(ImageFinding(
                 rule_id="IMG-003",

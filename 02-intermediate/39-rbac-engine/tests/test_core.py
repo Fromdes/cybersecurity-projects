@@ -116,7 +116,7 @@ class TestRBACEngine:
     def test_role_cycle_safety(self) -> None:
         e = RBACEngine()
         r1 = e.add_role("r1", parents=["r2"])
-        r2 = e.add_role("r2", parents=["r1"])
+        e.add_role("r2", parents=["r1"])
         r1.add_permission("res", "act")
         u = e.add_user("u1")
         u.assign_role("r1")
@@ -127,7 +127,7 @@ class TestRBACEngine:
         e = RBACEngine()
         e.add_role("r")
         e.grant_permission("r", "files", "delete")
-        u = e.add_user("u1")
+        e.add_user("u1")
         e.assign_role("u1", "r")
         assert e.check("u1", "files", "delete").allowed
         e.revoke_role("u1", "r")

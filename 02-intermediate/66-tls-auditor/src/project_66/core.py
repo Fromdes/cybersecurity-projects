@@ -122,7 +122,7 @@ class TLSAuditResult:
 
 def _parse_dn(dn_tuples: tuple[tuple[str, str], ...]) -> dict[str, str]:
     """Convert SSL certificate DN tuple list to dict."""
-    return {k: v for k, v in dn_tuples}
+    return dict(dn_tuples)
 
 
 def _parse_cert(cert: dict) -> CertInfo:  # type: ignore[type-arg]

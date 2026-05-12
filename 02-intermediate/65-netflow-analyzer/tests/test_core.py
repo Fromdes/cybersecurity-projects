@@ -93,13 +93,13 @@ class TestParseNetflowV5:
 
 class TestNetFlowRecord:
     def _rec(self, **kwargs) -> NetFlowRecord:
-        defaults = dict(
-            src_ip="10.0.0.1", dst_ip="10.0.0.2",
-            src_port=1234, dst_port=80, protocol=6,
-            packets=5, bytes_count=500,
-            first_ms=1000, last_ms=3000,
-            tcp_flags=0x02, tos=0,
-        )
+        defaults = {
+            "src_ip": "10.0.0.1", "dst_ip": "10.0.0.2",
+            "src_port": 1234, "dst_port": 80, "protocol": 6,
+            "packets": 5, "bytes_count": 500,
+            "first_ms": 1000, "last_ms": 3000,
+            "tcp_flags": 0x02, "tos": 0,
+        }
         defaults.update(kwargs)
         return NetFlowRecord(**defaults)
 

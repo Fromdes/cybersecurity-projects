@@ -105,10 +105,7 @@ def cmd_validate(
 ) -> None:
     """Validate JWT signature and claims against a key."""
     key_path = Path(key_source)
-    if key_path.exists():
-        secret_or_key = key_path.read_text().strip()
-    else:
-        secret_or_key = key_source
+    secret_or_key = key_path.read_text().strip() if key_path.exists() else key_source
 
     alg_list = list(algorithms) if algorithms else None
     result = validate_token(

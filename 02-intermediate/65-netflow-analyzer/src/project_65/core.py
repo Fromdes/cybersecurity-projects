@@ -84,7 +84,7 @@ def parse_netflow_v5(data: bytes) -> NetFlowV5Packet | None:
     if len(data) < NETFLOW_V5_HEADER_SIZE:
         return None
 
-    version, count, sys_uptime, unix_secs, unix_nsecs, flow_seq, engine_type, engine_id, sampling = \
+    version, count, sys_uptime, unix_secs, unix_nsecs, flow_seq, _engine_type, _engine_id, _sampling = \
         struct.unpack("!HHIIIIBBH", data[:NETFLOW_V5_HEADER_SIZE])
 
     if version != NETFLOW_V5_VERSION:
@@ -112,10 +112,10 @@ def _parse_v5_record(data: bytes) -> NetFlowRecord | None:
     if len(data) < NETFLOW_V5_RECORD_SIZE:
         return None
     # NetFlow v5 record: 48 bytes total; trailing 2 bytes are padding (xx = no values)
-    (src_addr, dst_addr, nexthop, input_if, output_if,
+    (src_addr, dst_addr, _nexthop, _input_if, _output_if,
      d_pkts, d_octets, first, last,
-     src_port, dst_port, pad1, tcp_flags, proto, tos,
-     src_as, dst_as, src_mask, dst_mask) = struct.unpack("!IIIHHIIIIHHBBBBHHBBxx", data)
+     src_port, dst_port, _pad1, tcp_flags, proto, tos,
+     _src_as, _dst_as, _src_mask, _dst_mask) = struct.unpack("!IIIHHIIIIHHBBBBHHBBxx", data)
 
     return NetFlowRecord(
         src_ip=_ip_from_uint32(src_addr),

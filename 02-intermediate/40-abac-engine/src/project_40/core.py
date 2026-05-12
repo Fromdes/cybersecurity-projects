@@ -13,7 +13,7 @@ import logging
 import operator
 import re
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 import yaml
@@ -24,14 +24,14 @@ logger = logging.getLogger(__name__)
 # Effect & condition operators
 # ---------------------------------------------------------------------------
 
-class Effect(str, Enum):
+class Effect(StrEnum):
     """Policy rule effect."""
 
     PERMIT = "permit"
     DENY = "deny"
 
 
-class Operator(str, Enum):
+class Operator(StrEnum):
     """Supported condition operators."""
 
     EQ = "eq"
@@ -200,7 +200,7 @@ class ABACDecision:
 # Combining algorithms
 # ---------------------------------------------------------------------------
 
-class CombiningAlgorithm(str, Enum):
+class CombiningAlgorithm(StrEnum):
     """Rule combining algorithm."""
 
     DENY_OVERRIDES = "deny-overrides"

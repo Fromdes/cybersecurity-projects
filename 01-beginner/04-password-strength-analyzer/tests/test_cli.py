@@ -11,7 +11,7 @@ from project_04.cli import main
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["password-analyze"] + args
+    sys.argv = ["password-analyze", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -20,15 +20,15 @@ def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str,
 
 class TestCLI:
     def test_weak_password_exits_1(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, out, _ = _run(["abc"], capsys)
+        code, _out, _ = _run(["abc"], capsys)
         assert code == 1
 
     def test_strong_password_exits_0(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, out, _ = _run(["C0rrectH0rseB@tteryStaple!"], capsys)
+        code, _out, _ = _run(["C0rrectH0rseB@tteryStaple!"], capsys)
         assert code == 0
 
     def test_json_output(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, out, _ = _run(["Abc1!xyz89", "--json"], capsys)
+        _code, out, _ = _run(["Abc1!xyz89", "--json"], capsys)
         data = json.loads(out)
         assert "score" in data
         assert "entropy_bits" in data
@@ -47,5 +47,5 @@ class TestCLI:
     ) -> None:
         import io
         monkeypatch.setattr("sys.stdin", io.StringIO("C0rrectH0rse@Staple!\n"))
-        code, out, _ = _run(["--stdin"], capsys)
+        _code, out, _ = _run(["--stdin"], capsys)
         assert "Strength" in out

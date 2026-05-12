@@ -38,7 +38,7 @@ def _make_pem(tmp_path: Path, days: int = 365) -> Path:
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["cert-inspect"] + args
+    sys.argv = ["cert-inspect", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -50,21 +50,21 @@ class TestFileCLI:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         pem = _make_pem(tmp_path)
-        code, out, _ = _run(["file", str(pem)], capsys)
+        _code, out, _ = _run(["file", str(pem)], capsys)
         assert "Subject" in out
 
     def test_json_output(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         pem = _make_pem(tmp_path)
-        code, out, _ = _run(["file", str(pem), "--json"], capsys)
+        _code, out, _ = _run(["file", str(pem), "--json"], capsys)
         data = json.loads(out)
         assert "subject" in data
         assert "expiry_status" in data
         assert "warnings" in data
 
     def test_missing_file_exits_1(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(["file", "/no/such/cert.pem"], capsys)
+        code, _, _err = _run(["file", "/no/such/cert.pem"], capsys)
         assert code == 1
 
     def test_self_signed_cert_has_warnings(

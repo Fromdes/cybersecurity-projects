@@ -6,7 +6,7 @@ import json
 import logging
 import re
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -35,7 +35,7 @@ _HOST_RE = re.compile(
 )
 
 
-class FetchDirective(str, Enum):
+class FetchDirective(StrEnum):
     """Fetch directives controlling resource loading."""
 
     DEFAULT_SRC = "default-src"
@@ -59,21 +59,21 @@ class FetchDirective(str, Enum):
     FORM_ACTION = "form-action"
 
 
-class NavigationDirective(str, Enum):
+class NavigationDirective(StrEnum):
     """Navigation directives."""
 
     NAVIGATE_TO = "navigate-to"
     FORM_ACTION = "form-action"
 
 
-class ReportingDirective(str, Enum):
+class ReportingDirective(StrEnum):
     """Reporting directives."""
 
     REPORT_URI = "report-uri"
     REPORT_TO = "report-to"
 
 
-class OtherDirective(str, Enum):
+class OtherDirective(StrEnum):
     """Miscellaneous directives."""
 
     SANDBOX = "sandbox"
@@ -332,6 +332,4 @@ def is_valid_source_value(value: str) -> bool:
         return True
     if _HOST_RE.match(value):
         return True
-    if value == "*":
-        return True
-    return False
+    return value == "*"

@@ -8,10 +8,10 @@ import html
 import re
 import urllib.parse
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 
-class Encoding(str, Enum):
+class Encoding(StrEnum):
     """Supported encoding schemes."""
 
     BASE64 = "base64"

@@ -15,7 +15,7 @@ _MSG = "hello world"
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["hmac-auth"] + args
+    sys.argv = ["hmac-auth", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -47,7 +47,7 @@ class TestVerifyCLI:
         assert "VALID" in out
 
     def test_invalid_exits_1(self, capsys: pytest.CaptureFixture[str]) -> None:
-        code, _, err = _run(
+        code, _, _err = _run(
             ["--key", _PASSPHRASE, "verify", _MSG, "deadbeef" * 8], capsys
         )
         assert code == 1

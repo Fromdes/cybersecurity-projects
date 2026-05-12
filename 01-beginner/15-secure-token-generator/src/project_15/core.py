@@ -6,7 +6,7 @@ import math
 import secrets
 import uuid
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 DEFAULT_BYTE_LENGTH: int = 32
 MIN_BYTE_LENGTH: int = 16
@@ -21,7 +21,7 @@ UUID4_ENTROPY_BITS: float = 122.0
 UUID4_BYTE_LENGTH: int = 16
 
 
-class TokenFormat(str, Enum):
+class TokenFormat(StrEnum):
     """Output format for generated tokens."""
 
     HEX = "hex"

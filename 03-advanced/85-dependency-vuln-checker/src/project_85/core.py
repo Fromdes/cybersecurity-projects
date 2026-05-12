@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import json
 import logging
 import re
@@ -173,10 +174,8 @@ def _parse_severity(vuln_data: dict[str, Any]) -> tuple[str, float]:
             score_str = sev.get("score", "")
             m = re.search(r"CVSS:3\.\d+/[^/]+/[^/]+/[^/]+/([0-9.]+)$", score_str)
             if m:
-                try:
+                with contextlib.suppress(ValueError):
                     cvss_score = float(m.group(1))
-                except ValueError:
-                    pass
     return severity_label, cvss_score
 
 
@@ -252,7 +251,7 @@ def query_osv_batch(deps: list[Dependency]) -> list[DependencyResult]:
             for dep in batch:
                 results.append(DependencyResult(dependency=dep, vulnerabilities=[], error=str(exc)))
             continue
-        for dep, result_data in zip(batch, data.get("results", [])):
+        for dep, result_data in zip(batch, data.get("results", []), strict=False):
             vulns: list[Vulnerability] = []
             for vuln_data in result_data.get("vulns", []):
                 severity, cvss = _parse_severity(vuln_data)

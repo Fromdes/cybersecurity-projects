@@ -10,7 +10,7 @@ import json
 import logging
 import re
 import urllib.parse
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 # Context enum
 # ---------------------------------------------------------------------------
 
-class OutputContext(str, Enum):
+class OutputContext(StrEnum):
     """Rendering context that determines which encoder to apply."""
 
     HTML_BODY = "html_body"

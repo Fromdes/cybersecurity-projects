@@ -15,7 +15,7 @@ _PASSWORD = "test-passphrase-cli"
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["aes-crypt"] + args
+    sys.argv = ["aes-crypt", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -39,7 +39,7 @@ class TestEncryptCLI:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         with patch("project_08.cli.getpass.getpass", return_value=_PASSWORD):
-            code, _, err = _run(["encrypt", str(tmp_path / "no.txt")], capsys)
+            code, _, _err = _run(["encrypt", str(tmp_path / "no.txt")], capsys)
         assert code == 1
 
     def test_password_mismatch_exits_1(
@@ -50,7 +50,7 @@ class TestEncryptCLI:
         with patch(
             "project_08.cli.getpass.getpass", side_effect=["pass1", "pass2"]
         ):
-            code, _, err = _run(["encrypt", str(src)], capsys)
+            code, _, _err = _run(["encrypt", str(src)], capsys)
         assert code == 1
 
 
@@ -64,7 +64,7 @@ class TestDecryptCLI:
         encrypt_file(src, enc, _PASSWORD)
         dec = tmp_path / "plain.txt.dec"
         with patch("project_08.cli.getpass.getpass", return_value=_PASSWORD):
-            code, stdout, _ = _run(
+            code, _stdout, _ = _run(
                 ["decrypt", str(enc), "--output", str(dec)], capsys
             )
         assert code == 0
@@ -78,5 +78,5 @@ class TestDecryptCLI:
         enc = tmp_path / "plain.txt.enc"
         encrypt_file(src, enc, _PASSWORD)
         with patch("project_08.cli.getpass.getpass", return_value="wrongpass"):
-            code, _, err = _run(["decrypt", str(enc)], capsys)
+            code, _, _err = _run(["decrypt", str(enc)], capsys)
         assert code == 1

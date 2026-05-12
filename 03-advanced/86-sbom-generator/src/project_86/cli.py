@@ -25,10 +25,7 @@ def generate_cmd(manifest: Path, fmt: str, output: Path) -> None:
     """Generate an SBOM from a dependency manifest."""
     components = detect_and_parse(manifest)
     doc = SBOMDocument.from_components(components, source=manifest.name)
-    if fmt == "cyclonedx":
-        data = doc.to_cyclonedx()
-    else:
-        data = doc.to_spdx()
+    data = doc.to_cyclonedx() if fmt == "cyclonedx" else doc.to_spdx()
     output.write_text(json.dumps(data, indent=2))
     summary = doc.summary()
     click.echo(f"SBOM generated: {summary['total_components']} component(s) → {output}")

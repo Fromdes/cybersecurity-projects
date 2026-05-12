@@ -12,7 +12,7 @@ from project_03.cli import main
 
 
 def _run(args: list[str], capsys: pytest.CaptureFixture[str]) -> tuple[int, str, str]:
-    sys.argv = ["fim"] + args
+    sys.argv = ["fim", *args]
     with pytest.raises(SystemExit) as exc:
         main()
     captured = capsys.readouterr()
@@ -41,7 +41,7 @@ class TestInitCLI:
     def test_init_non_directory(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        code, _, err = _run(["init", str(tmp_path / "no_dir")], capsys)
+        code, _, _err = _run(["init", str(tmp_path / "no_dir")], capsys)
         assert code == 1
 
 
@@ -80,7 +80,7 @@ class TestCheckCLI:
     def test_check_missing_baseline(
         self, sample_dir: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        code, _, err = _run(
+        code, _, _err = _run(
             ["check", str(sample_dir), "--baseline", str(sample_dir / "no.json")],
             capsys,
         )

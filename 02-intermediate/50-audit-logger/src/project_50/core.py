@@ -8,7 +8,7 @@ import logging
 import time
 import uuid
 from dataclasses import asdict, dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Final
 
@@ -25,7 +25,7 @@ CHAIN_HMAC_KEY: Final[bytes] = b"audit-chain-integrity-key"
 # Event model
 # ---------------------------------------------------------------------------
 
-class Severity(str, Enum):
+class Severity(StrEnum):
     INFO = "INFO"
     WARNING = "WARNING"
     ERROR = "ERROR"

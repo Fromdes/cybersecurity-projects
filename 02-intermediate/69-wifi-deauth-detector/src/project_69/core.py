@@ -123,7 +123,7 @@ def parse_dot11_frame(data: bytes, timestamp: float = 0.0) -> Dot11Frame | None:
         return None
 
     fc0 = data[0]
-    fc1 = data[1]
+    data[1]
 
     frame_type = (fc0 >> 2) & 0x03
     frame_subtype = (fc0 >> 4) & 0x0F
@@ -209,7 +209,7 @@ def read_pcap_frames(data: bytes) -> list[tuple[float, bytes]]:
     offset = PCAP_GLOBAL_HEADER_SIZE
 
     while offset + PCAP_PACKET_HEADER_SIZE <= len(data):
-        ts_sec, ts_usec, incl_len, orig_len = struct.unpack_from(
+        ts_sec, ts_usec, incl_len, _orig_len = struct.unpack_from(
             f"{endian}IIII", data, offset
         )
         offset += PCAP_PACKET_HEADER_SIZE

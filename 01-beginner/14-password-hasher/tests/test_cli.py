@@ -18,7 +18,7 @@ def _run(
     monkeypatch: pytest.MonkeyPatch,
     stdin_text: str = "",
 ) -> tuple[int, str, str]:
-    sys.argv = ["passwd-hash"] + args
+    sys.argv = ["passwd-hash", *args]
     monkeypatch.setattr("sys.stdin", __import__("io").StringIO(stdin_text))
     with pytest.raises(SystemExit) as exc:
         main()
@@ -46,7 +46,7 @@ class TestHashCLI:
     def test_empty_password_exits_1(
         self, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
     ) -> None:
-        code, _, err = _run(["--stdin", "hash"], capsys, monkeypatch, "")
+        code, _, _err = _run(["--stdin", "hash"], capsys, monkeypatch, "")
         assert code == 1
 
 

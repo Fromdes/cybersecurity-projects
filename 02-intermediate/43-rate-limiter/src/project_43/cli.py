@@ -102,7 +102,7 @@ def cmd_compare(limit: int, window: float, n_requests: int) -> None:
     click.echo(f"{'Req':>4}  " + "  ".join(limiters.keys()))
     for i in range(1, n_requests + 1):
         row = f" {i:02d}   "
-        for name, lim in limiters.items():
+        for _name, lim in limiters.items():
             d = lim.check("u")
             symbol = click.style("A", fg="green") if d.allowed else click.style("D", fg="red")
             row += f"  {symbol}{'':12}"

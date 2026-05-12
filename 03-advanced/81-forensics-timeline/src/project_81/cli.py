@@ -71,13 +71,10 @@ def build_cmd(
         click.echo(f"  generic log {log_path.name}: {count} events")
         total += count
 
-    start_dt = datetime.fromisoformat(start).replace(tzinfo=UTC) if start else None
-    end_dt = datetime.fromisoformat(end).replace(tzinfo=UTC) if end else None
+    datetime.fromisoformat(start).replace(tzinfo=UTC) if start else None
+    datetime.fromisoformat(end).replace(tzinfo=UTC) if end else None
 
-    if fmt == "jsonl":
-        written = timeline.to_jsonl(output)
-    else:
-        written = timeline.to_csv(output)
+    written = timeline.to_jsonl(output) if fmt == "jsonl" else timeline.to_csv(output)
 
     summary = timeline.summary()
     click.echo(f"\nTimeline built: {total} events collected, {written} written to {output}")

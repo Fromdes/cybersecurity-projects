@@ -9,7 +9,7 @@ import re
 import threading
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
@@ -39,7 +39,7 @@ PRIVILEGED_PROCESSES: tuple[str, ...] = (
 )
 
 
-class ThreatLevel(str, Enum):
+class ThreatLevel(StrEnum):
     """EDR finding threat level."""
 
     INFO = "INFO"

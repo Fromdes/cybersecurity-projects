@@ -38,7 +38,7 @@ class TestComputeRisk:
 
     def test_dangerous_port_raises_score(self) -> None:
         port = next(iter(DANGEROUS_PORTS))
-        score, flags = _compute_risk(port, "127.0.0.1", 1234, "tcp")
+        score, _flags = _compute_risk(port, "127.0.0.1", 1234, "tcp")
         assert score >= 50
 
     def test_telnet_port_extra_score(self) -> None:

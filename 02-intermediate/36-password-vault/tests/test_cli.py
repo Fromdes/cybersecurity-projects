@@ -11,7 +11,7 @@ from project_36.cli import main
 
 class TestCLI:
     def _run(self, args: list[str], vault_path: Path, password: str = "master") -> None:
-        with patch("sys.argv", ["vault", "--vault", str(vault_path)] + args):
+        with patch("sys.argv", ["vault", "--vault", str(vault_path), *args]):
             with patch("getpass.getpass", return_value=password):
                 main()
 

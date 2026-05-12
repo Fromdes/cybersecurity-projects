@@ -1,18 +1,19 @@
 """File integrity monitoring via SHA-256 baseline snapshots."""
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import os
 from dataclasses import asdict, dataclass
-from enum import Enum
+from enum import StrEnum
 
 HASH_ALGORITHM: str = "sha256"
 CHUNK_SIZE: int = 65_536  # 64 KiB read buffer
 BASELINE_VERSION: str = "1"
 
 
-class ChangeType(str, Enum):
+class ChangeType(StrEnum):
     """Type of detected file integrity change."""
 
     CREATED = "created"
@@ -74,10 +75,8 @@ def snapshot_directory(root: str, recursive: bool = True) -> dict[str, FileSnaps
     for dirpath, _, filenames in os.walk(root):
         for fname in filenames:
             fpath = os.path.join(dirpath, fname)
-            try:
+            with contextlib.suppress(OSError):
                 snapshots[fpath] = snapshot_file(fpath)
-            except OSError:
-                pass
         if not recursive:
             break
     return snapshots

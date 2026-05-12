@@ -106,7 +106,7 @@ class TestSignVerify:
             verify_file(f, signature, public_key)
 
     def test_verify_wrong_signature_raises(self, tmp_path: Path) -> None:
-        private_key, public_key = generate_key_pair()
+        _private_key, public_key = generate_key_pair()
         f = tmp_path / "doc.txt"
         f.write_bytes(b"document")
         with pytest.raises(SignatureVerificationError):
@@ -118,8 +118,8 @@ class TestSignVerify:
             sign_file(tmp_path / "no.txt", private_key)
 
     def test_different_keys_fail_verification(self, tmp_path: Path) -> None:
-        pk1, pub1 = generate_key_pair()
-        pk2, pub2 = generate_key_pair()
+        pk1, _pub1 = generate_key_pair()
+        _pk2, pub2 = generate_key_pair()
         f = tmp_path / "doc.txt"
         f.write_bytes(b"document data")
         signature = sign_file(f, pk1)

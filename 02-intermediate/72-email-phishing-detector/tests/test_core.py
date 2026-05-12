@@ -202,9 +202,9 @@ class TestAnalyseEmail:
         assert len(result.urls) >= 1
 
     def test_score_capped_at_100(self) -> None:
-        body = " ".join([kw for kw in list(
+        body = " ".join(list(list(
             __import__("project_72.core", fromlist=["PHISHING_KEYWORDS"]).PHISHING_KEYWORDS
-        )[:15]])
+        )[:15]))
         raw = _make_email(body=body)
         result = analyse_email(raw)
         assert result.score <= 100
