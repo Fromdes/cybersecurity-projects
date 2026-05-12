@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-97-encrypted-messaging"
+version = "0.1.0"
+description = "Encrypted Messaging Library — Double Ratchet algorithm implementation"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1", "cryptography>=41.0"]
+
+[project.scripts]
+encrypted-messaging = "project_97.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_97"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]

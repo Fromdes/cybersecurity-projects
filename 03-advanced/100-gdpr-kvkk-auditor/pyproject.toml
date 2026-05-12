@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-100-gdpr-kvkk-auditor"
+version = "0.1.0"
+description = "GDPR/KVKK Compliance Auditor — audit data asset inventories against regulation requirements"
+requires-python = ">=3.11"
+dependencies = ["click>=8.1"]
+
+[project.scripts]
+gdpr-kvkk-auditor = "project_100.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_100"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E","F","W","B","I","N","UP","S","A","C4","SIM","RUF"]
+ignore = ["S101","S104"]

@@ -1,0 +1,52 @@
+{
+  "assets": [
+    {
+      "name": "user_accounts_db",
+      "data_categories": ["email", "name", "password_hash"],
+      "purpose": "User authentication and account management",
+      "legal_basis": "contract",
+      "retention_days": 365,
+      "cross_border_transfer": false,
+      "transfer_destination": "",
+      "consent_obtained": true,
+      "dpo_notified": false,
+      "encryption_at_rest": true,
+      "encryption_in_transit": true,
+      "data_subjects": "registered users",
+      "controller": "ACME Corp",
+      "processor": ""
+    },
+    {
+      "name": "health_records_db",
+      "data_categories": ["health", "biometric"],
+      "purpose": "Patient management and treatment coordination",
+      "legal_basis": "consent",
+      "retention_days": 3650,
+      "cross_border_transfer": true,
+      "transfer_destination": "United States",
+      "consent_obtained": true,
+      "dpo_notified": true,
+      "encryption_at_rest": true,
+      "encryption_in_transit": true,
+      "data_subjects": "patients",
+      "controller": "HealthCo",
+      "processor": "CloudVendor",
+      "special_category": true
+    },
+    {
+      "name": "analytics_raw_dump",
+      "data_categories": ["ip_address", "behavior"],
+      "purpose": "",
+      "legal_basis": "undefined",
+      "retention_days": 0,
+      "cross_border_transfer": true,
+      "transfer_destination": "Russia",
+      "consent_obtained": false,
+      "dpo_notified": false,
+      "encryption_at_rest": false,
+      "encryption_in_transit": false,
+      "data_subjects": "website visitors",
+      "controller": "BadAnalyticsCo"
+    }
+  ]
+}
